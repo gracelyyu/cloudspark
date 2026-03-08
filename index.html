@@ -9,634 +9,148 @@
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,wght@0,300;0,700;0,900;1,300;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --orange: #E8441A;
-    --ink: #1C1A16;
-    --paper: #F7F3EC;
-    --cream: #EDE8DE;
-    --warm-mid: #8C7B5E;
-    --green: #3D6B4F;
-    --blue: #2B4A8C;
-    --yellow: #E8C84A;
-    --pink: #D4547A;
+    --orange: #E8441A; --ink: #1C1A16; --paper: #F7F3EC; --cream: #EDE8DE;
+    --warm-mid: #8C7B5E; --green: #3D6B4F; --blue: #2B4A8C;
+    --yellow: #E8C84A; --pink: #D4547A;
     --font-display: 'Fraunces', serif;
     --font-hand: 'Caveat', cursive;
     --font-body: 'DM Sans', sans-serif;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: var(--font-body);
-    min-height: 100vh;
-    overflow-x: hidden;
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='4' fill='%23E8441A' opacity='0.7'/%3E%3C/svg%3E") 12 12, auto;
-  }
-
-  /* Grain texture overlay */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 9999;
-    opacity: 0.6;
-  }
-
-  .container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-
-  /* ── HEADER ── */
-  header {
-    padding: 32px 0 0;
-    position: relative;
-  }
-
-  .header-inner {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 24px;
-    flex-wrap: wrap;
-  }
-
-  .logo-block {
-    position: relative;
-  }
-
-  .logo {
-    font-family: var(--font-display);
-    font-size: clamp(72px, 12vw, 128px);
-    font-weight: 900;
-    color: var(--orange);
-    line-height: 0.85;
-    letter-spacing: -4px;
-    position: relative;
-    display: inline-block;
-  }
-
-  .logo-squiggle {
-    position: absolute;
-    bottom: -8px;
-    left: 0;
-    width: 100%;
-  }
-
-  .tagline {
-    font-family: var(--font-hand);
-    font-size: 22px;
-    color: var(--warm-mid);
-    margin-top: 18px;
-    max-width: 340px;
-    line-height: 1.4;
-    transform: rotate(-1deg);
-  }
-
-  .header-meta {
-    text-align: right;
-    padding-top: 12px;
-  }
-
-  .header-meta p {
-    font-size: 13px;
-    color: var(--warm-mid);
-    line-height: 1.6;
-    max-width: 240px;
-    margin-left: auto;
-  }
-
-  /* ── BENTO GRID ── */
-  .bento {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: auto;
-    gap: 14px;
-    margin: 40px 0 0;
-  }
-
-  /* Bento cells */
-  .cell {
-    border-radius: 16px;
-    padding: 24px;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.25s cubic-bezier(.34,1.56,.64,1);
-  }
-
+  body { background: var(--paper); color: var(--ink); font-family: var(--font-body); min-height: 100vh; overflow-x: hidden; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 9999; opacity: 0.6; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+  header { padding: 32px 0 0; }
+  .logo { font-family: var(--font-display); font-size: clamp(72px, 12vw, 128px); font-weight: 900; color: var(--orange); line-height: 0.85; letter-spacing: -4px; position: relative; display: inline-block; }
+  .logo-squiggle { position: absolute; bottom: -8px; left: 0; width: 100%; }
+  .tagline { font-family: var(--font-hand); font-size: 22px; color: var(--warm-mid); margin-top: 18px; max-width: 340px; line-height: 1.4; transform: rotate(-1deg); }
+  .bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; margin: 40px 0 0; }
+  .cell { border-radius: 16px; padding: 24px; position: relative; overflow: hidden; transition: transform 0.25s cubic-bezier(.34,1.56,.64,1); }
   .cell:hover { transform: translateY(-3px) rotate(0.3deg); }
-
-  /* Hand-drawn border effect via SVG filter */
-  .cell-sketchy {
-    filter: url(#sketchy);
-  }
-
-  /* Cell placements */
   .cell-intro       { grid-column: 1 / 8;  grid-row: 1; background: var(--ink); color: var(--paper); }
   .cell-howto       { grid-column: 8 / 13; grid-row: 1; background: var(--cream); }
   .cell-disciplines { grid-column: 1 / 5;  grid-row: 2; background: var(--orange); color: white; }
   .cell-doodle      { grid-column: 5 / 8;  grid-row: 2; background: var(--yellow); }
   .cell-generator   { grid-column: 8 / 13; grid-row: 1 / 3; background: var(--paper); border: 3px solid var(--ink); }
-
   @media (max-width: 768px) {
     .bento { grid-template-columns: 1fr 1fr; gap: 12px; }
-    .cell-intro, .cell-howto, .cell-disciplines, .cell-doodle,
-    .cell-generator { grid-column: 1 / 3; grid-row: auto; }
+    .cell-intro, .cell-howto, .cell-disciplines, .cell-doodle, .cell-generator { grid-column: 1 / 3; grid-row: auto; }
   }
-
-  /* ── INTRO CELL ── */
-  .cell-intro .cell-label {
-    font-family: var(--font-hand);
-    font-size: 14px;
-    color: var(--orange);
-    margin-bottom: 12px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-  }
-
-  .cell-intro h2 {
-    font-family: var(--font-display);
-    font-size: clamp(26px, 4vw, 40px);
-    font-weight: 700;
-    line-height: 1.1;
-    font-style: italic;
-    margin-bottom: 16px;
-  }
-
-  .cell-intro p {
-    font-size: 15px;
-    line-height: 1.7;
-    color: #C5BFB3;
-    max-width: 480px;
-  }
-
-  .cell-intro .deco-arrow {
-    position: absolute;
-    bottom: 20px;
-    right: 24px;
-    font-family: var(--font-hand);
-    font-size: 48px;
-    color: var(--orange);
-    transform: rotate(15deg);
-    opacity: 0.6;
-  }
-
-  /* ── HOW TO CELL ── */
-  .cell-howto .cell-label {
-    font-family: var(--font-hand);
-    font-size: 13px;
-    color: var(--warm-mid);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 16px;
-  }
-
+  .cell-label { font-family: var(--font-hand); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+  .cell-intro .cell-label { color: var(--orange); font-size: 14px; }
+  .cell-howto .cell-label { color: var(--warm-mid); margin-bottom: 16px; }
+  .cell-intro h2 { font-family: var(--font-display); font-size: clamp(26px, 4vw, 40px); font-weight: 700; line-height: 1.1; font-style: italic; margin-bottom: 16px; }
+  .cell-intro p { font-size: 15px; line-height: 1.7; color: #C5BFB3; max-width: 480px; }
+  .cell-intro .deco-arrow { position: absolute; bottom: 20px; right: 24px; font-family: var(--font-hand); font-size: 48px; color: var(--orange); transform: rotate(15deg); opacity: 0.6; }
   .steps { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-
-  .step {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-  }
-
-  .step-num {
-    font-family: var(--font-hand);
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--orange);
-    line-height: 1;
-    min-width: 28px;
-  }
-
-  .step-text {
-    font-size: 14px;
-    line-height: 1.5;
-    color: var(--ink);
-    padding-top: 4px;
-  }
-
-  .step-text strong {
-    font-weight: 500;
-    display: block;
-    margin-bottom: 2px;
-  }
-
-  /* ── DISCIPLINES CELL ── */
-  .cell-disciplines .cell-label {
-    font-family: var(--font-hand);
-    font-size: 13px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    opacity: 0.8;
-    margin-bottom: 12px;
-  }
-
-  .cell-disciplines h3 {
-    font-family: var(--font-display);
-    font-size: 28px;
-    font-weight: 900;
-    line-height: 1.1;
-    margin-bottom: 18px;
-  }
-
-  .disc-tags {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .disc-tag {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-family: var(--font-hand);
-    font-size: 17px;
-    font-weight: 600;
-    cursor: pointer;
-    padding: 6px 10px;
-    border-radius: 8px;
-    transition: background 0.2s, transform 0.2s;
-    border: none;
-    background: rgba(255,255,255,0.15);
-    color: white;
-    text-align: left;
-    width: 100%;
-  }
-
-  .disc-tag:hover, .disc-tag.active {
-    background: rgba(255,255,255,0.3);
-    transform: translateX(4px);
-  }
-
-  .disc-tag.active {
-    background: white;
-    color: var(--orange);
-  }
-
+  .step { display: flex; gap: 12px; align-items: flex-start; }
+  .step-num { font-family: var(--font-hand); font-size: 28px; font-weight: 700; color: var(--orange); line-height: 1; min-width: 28px; }
+  .step-text { font-size: 14px; line-height: 1.5; color: var(--ink); padding-top: 4px; }
+  .step-text strong { font-weight: 500; display: block; margin-bottom: 2px; }
+  .cell-disciplines .cell-label { opacity: 0.8; }
+  .cell-disciplines h3 { font-family: var(--font-display); font-size: 28px; font-weight: 900; line-height: 1.1; margin-bottom: 18px; }
+  .disc-tags { display: flex; flex-direction: column; gap: 6px; }
+  .disc-tag { display: flex; align-items: center; gap: 8px; font-family: var(--font-hand); font-size: 17px; font-weight: 600; cursor: pointer; padding: 6px 10px; border-radius: 8px; transition: background 0.2s, transform 0.2s; border: none; background: rgba(255,255,255,0.15); color: white; text-align: left; width: 100%; }
+  .disc-tag:hover { background: rgba(255,255,255,0.3); transform: translateX(4px); }
+  .disc-tag.active { background: white; color: var(--orange); transform: translateX(4px); }
   .disc-icon { font-size: 20px; }
-
-  /* ── DOODLE CELL ── */
-  .cell-doodle {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    gap: 8px;
-  }
-
-  .cell-doodle .doodle-text {
-    font-family: var(--font-hand);
-    font-size: 20px;
-    color: var(--ink);
-    line-height: 1.3;
-  }
-
-  /* ── GENERATOR CELL ── */
-  .cell-generator {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    padding: 0;
-    overflow: hidden;
-  }
-
-  .gen-top {
-    background: var(--ink);
-    padding: 20px 24px 16px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .gen-top-label {
-    font-family: var(--font-hand);
-    font-size: 16px;
-    color: var(--orange);
-    letter-spacing: 1px;
-  }
-
-  .gen-disc-badge {
-    font-family: var(--font-hand);
-    font-size: 13px;
-    background: var(--orange);
-    color: white;
-    padding: 3px 10px;
-    border-radius: 20px;
-    display: none;
-  }
-
+  .cell-doodle { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 8px; }
+  .doodle-text { font-family: var(--font-hand); font-size: 20px; color: var(--ink); line-height: 1.3; }
+  .cell-generator { display: flex; flex-direction: column; gap: 0; padding: 0; overflow: hidden; }
+  .gen-top { background: var(--ink); padding: 20px 24px 16px; display: flex; align-items: center; justify-content: space-between; }
+  .gen-top-label { font-family: var(--font-hand); font-size: 16px; color: var(--orange); letter-spacing: 1px; }
+  .gen-disc-badge { font-family: var(--font-hand); font-size: 13px; background: var(--orange); color: white; padding: 3px 10px; border-radius: 20px; display: none; }
   .gen-disc-badge.visible { display: block; }
-
-  .gen-body {
-    padding: 20px 24px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .gen-placeholder {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    flex: 1;
-    gap: 16px;
-    padding: 40px 0;
-    text-align: center;
-  }
-
-  .gen-placeholder .big-spark {
-    font-family: var(--font-display);
-    font-size: 72px;
-    font-style: italic;
-    color: var(--cream);
-    line-height: 1;
-  }
-
-  .gen-placeholder p {
-    font-family: var(--font-hand);
-    font-size: 18px;
-    color: var(--warm-mid);
-    max-width: 220px;
-    line-height: 1.4;
-  }
-
-  /* Card groups */
+  .gen-body { padding: 20px 24px; flex: 1; display: flex; flex-direction: column; gap: 16px; overflow-y: auto; }
+  .gen-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 1; gap: 16px; padding: 40px 0; text-align: center; }
+  .gen-placeholder .big-spark { font-family: var(--font-display); font-size: 72px; font-style: italic; color: var(--cream); line-height: 1; }
+  .gen-placeholder p { font-family: var(--font-hand); font-size: 18px; color: var(--warm-mid); max-width: 220px; line-height: 1.4; }
   .card-group { display: flex; flex-direction: column; gap: 8px; }
+  .card-group-label { font-family: var(--font-hand); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--warm-mid); margin-bottom: 4px; }
 
-  .card-group-label {
-    font-family: var(--font-hand);
-    font-size: 13px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--warm-mid);
-    margin-bottom: 4px;
-  }
-
+  /* Card wrapper for lock button */
+  .card-wrap { position: relative; display: flex; align-items: stretch; gap: 0; }
   .brief-card {
-    border-radius: 10px;
-    padding: 10px 14px;
-    font-size: 14px;
-    line-height: 1.45;
-    position: relative;
+    border-radius: 10px; padding: 10px 14px; font-size: 14px; line-height: 1.45;
     animation: cardReveal 0.4s cubic-bezier(.34,1.56,.64,1) both;
+    flex: 1; transition: opacity 0.2s, border-radius 0.2s;
   }
-
-  .brief-card.do-card {
-    background: var(--green);
-    color: white;
-    border-left: 3px solid rgba(255,255,255,0.4);
-  }
-
-  .brief-card.dont-card {
-    background: #FFF0EC;
-    color: var(--ink);
-    border-left: 3px solid var(--orange);
-  }
-
-  .brief-card .card-prefix {
-    font-family: var(--font-hand);
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    opacity: 0.75;
-    display: block;
-    margin-bottom: 3px;
-  }
-
+  .brief-card.do-card { background: var(--green); color: white; border-left: 3px solid rgba(255,255,255,0.4); }
+  .brief-card.dont-card { background: #FFF0EC; color: var(--ink); border-left: 3px solid var(--orange); }
+  .brief-card .card-prefix { font-family: var(--font-hand); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; opacity: 0.75; display: block; margin-bottom: 3px; }
   .brief-card.do-card .card-prefix { color: rgba(255,255,255,0.8); }
   .brief-card.dont-card .card-prefix { color: var(--orange); }
 
-  @keyframes cardReveal {
-    from { opacity: 0; transform: translateY(12px) rotate(-1deg); }
-    to   { opacity: 1; transform: translateY(0) rotate(0deg); }
+  /* Lock button */
+  .lock-btn {
+    border: none; background: transparent; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    width: 36px; min-width: 36px; border-radius: 0 10px 10px 0;
+    opacity: 0; transition: opacity 0.2s, background 0.2s;
+    padding: 0;
   }
+  .card-wrap:hover .lock-btn { opacity: 1; }
+  .lock-btn.locked { opacity: 1; }
+  .lock-btn svg { width: 16px; height: 16px; }
 
-  .action-step {
-    background: var(--yellow);
-    border-radius: 10px;
-    padding: 12px 14px;
-    animation: cardReveal 0.4s 0.5s cubic-bezier(.34,1.56,.64,1) both;
-  }
+  .card-wrap .brief-card { border-radius: 10px 0 0 10px; }
+  .card-wrap .brief-card.do-card + .lock-btn { background: rgba(255,255,255,0.15); }
+  .card-wrap .brief-card.do-card + .lock-btn:hover,
+  .card-wrap .brief-card.do-card + .lock-btn.locked { background: rgba(255,255,255,0.3); }
+  .card-wrap .brief-card.dont-card + .lock-btn { background: #ffe0d6; }
+  .card-wrap .brief-card.dont-card + .lock-btn:hover,
+  .card-wrap .brief-card.dont-card + .lock-btn.locked { background: #ffc9b5; }
 
-  .action-step .card-prefix {
-    font-family: var(--font-hand);
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #6B5000;
-    display: block;
-    margin-bottom: 3px;
-  }
+  .lock-btn .icon-locked { display: none; }
+  .lock-btn .icon-unlocked { display: block; }
+  .lock-btn.locked .icon-locked { display: block; }
+  .lock-btn.locked .icon-unlocked { display: none; }
 
-  .action-step p {
-    font-size: 14px;
-    color: var(--ink);
-    line-height: 1.45;
-  }
+  /* Locked card glow */
+  .card-wrap.is-locked .brief-card { box-shadow: 0 0 0 2px var(--yellow); }
+  .card-wrap.is-locked .lock-btn { opacity: 1; }
 
-  /* Generate button */
-  .gen-footer {
-    padding: 16px 24px 24px;
-  }
+  /* Locked animation override — no re-reveal */
+  .card-wrap.is-locked .brief-card { animation: none; }
 
-  .btn-generate {
-    width: 100%;
-    padding: 16px 24px;
-    background: var(--orange);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-family: var(--font-hand);
-    font-size: 22px;
-    font-weight: 700;
-    cursor: pointer;
-    position: relative;
-    transition: transform 0.2s cubic-bezier(.34,1.56,.64,1), box-shadow 0.2s;
-    box-shadow: 4px 4px 0 var(--ink);
-    letter-spacing: 0.5px;
-  }
+  @keyframes cardReveal { from { opacity: 0; transform: translateY(12px) rotate(-1deg); } to { opacity: 1; transform: translateY(0) rotate(0deg); } }
 
-  .btn-generate:hover {
-    transform: translate(-2px, -2px);
-    box-shadow: 6px 6px 0 var(--ink);
-  }
+  .action-step { background: var(--yellow); border-radius: 10px; padding: 12px 14px; animation: cardReveal 0.4s 0.5s cubic-bezier(.34,1.56,.64,1) both; }
+  .action-step.is-locked { animation: none; box-shadow: 0 0 0 2px var(--orange); }
+  .action-step .card-prefix { font-family: var(--font-hand); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #6B5000; display: block; margin-bottom: 3px; }
+  .action-step p { font-size: 14px; color: var(--ink); line-height: 1.45; }
+  .action-wrap { position: relative; display: flex; align-items: stretch; }
+  .action-wrap .action-step { flex: 1; border-radius: 10px 0 0 10px; }
+  .action-wrap .lock-btn { background: #d4b83a; border-radius: 0 10px 10px 0; }
+  .action-wrap .lock-btn:hover,
+  .action-wrap .lock-btn.locked { background: #b89e28; }
+  .action-wrap:hover .lock-btn { opacity: 1; }
 
-  .btn-generate:active {
-    transform: translate(2px, 2px);
-    box-shadow: 2px 2px 0 var(--ink);
-  }
+  .lock-hint { font-family: var(--font-hand); font-size: 12px; color: var(--warm-mid); text-align: center; margin-top: 2px; opacity: 0; transition: opacity 0.4s; }
+  .lock-hint.visible { opacity: 1; }
 
-  .btn-generate:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: 4px 4px 0 var(--ink);
-  }
-
-  .btn-hint {
-    font-family: var(--font-hand);
-    font-size: 13px;
-    color: var(--warm-mid);
-    text-align: center;
-    margin-top: 8px;
-    display: block;
-  }
-
-  /* ── QUOTE CELL ── */
-  .cell-quote {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 12px;
-  }
-
-  .cell-quote blockquote {
-    font-family: var(--font-display);
-    font-size: clamp(20px, 3vw, 26px);
-    font-style: italic;
-    font-weight: 300;
-    line-height: 1.3;
-  }
-
-  .cell-quote cite {
-    font-family: var(--font-hand);
-    font-size: 14px;
-    opacity: 0.7;
-    font-style: normal;
-  }
-
-  /* ── HINT CELL ── */
-  .cell-hint {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 10px;
-  }
-
-  .cell-hint .cell-label {
-    font-family: var(--font-hand);
-    font-size: 13px;
-    color: var(--warm-mid);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-  }
-
-  .cell-hint p {
-    font-size: 14px;
-    color: var(--ink);
-    line-height: 1.6;
-  }
-
-  .cell-hint .hand-note {
-    font-family: var(--font-hand);
-    font-size: 18px;
-    color: var(--orange);
-    transform: rotate(-2deg);
-    display: inline-block;
-    margin-top: 4px;
-  }
-
-  /* ── FOOTER ── */
-  footer {
-    margin: 48px 0 32px;
-    text-align: center;
-  }
-
-  footer p {
-    font-family: var(--font-hand);
-    font-size: 16px;
-    color: var(--warm-mid);
-  }
-
-  footer .footer-squiggle {
-    display: block;
-    margin: 12px auto 0;
-    opacity: 0.3;
-  }
-
-  /* ── DISCIPLINE ILLUSTRATION ── */
-  .disc-illustration {
-    width: 100%;
-    max-width: 160px;
-    margin: 0 auto;
-  }
-
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes wiggle {
-    0%, 100% { transform: rotate(-2deg); }
-    50%       { transform: rotate(2deg); }
-  }
-
+  .gen-footer { padding: 16px 24px 24px; }
+  .btn-generate { width: 100%; padding: 16px 24px; background: var(--orange); color: white; border: none; border-radius: 12px; font-family: var(--font-hand); font-size: 22px; font-weight: 700; cursor: pointer; transition: transform 0.2s cubic-bezier(.34,1.56,.64,1), box-shadow 0.2s; box-shadow: 4px 4px 0 var(--ink); letter-spacing: 0.5px; }
+  .btn-generate:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--ink); }
+  .btn-generate:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); }
+  .btn-generate:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: 4px 4px 0 var(--ink); }
+  .btn-hint { font-family: var(--font-hand); font-size: 13px; color: var(--warm-mid); text-align: center; margin-top: 8px; display: block; }
+  .print-hint { display: flex; align-items: center; gap: 6px; font-family: var(--font-hand); font-size: 13px; color: var(--warm-mid); margin-top: 8px; justify-content: center; opacity: 0; transition: opacity 0.4s; }
+  .print-hint.visible { opacity: 1; }
+  footer { margin: 48px 0 32px; text-align: center; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes wiggle { 0%, 100% { transform: rotate(-2deg); } 50% { transform: rotate(2deg); } }
   .anim-1 { animation: fadeUp 0.6s 0.1s both; }
   .anim-2 { animation: fadeUp 0.6s 0.2s both; }
   .anim-3 { animation: fadeUp 0.6s 0.3s both; }
   .anim-4 { animation: fadeUp 0.6s 0.4s both; }
   .anim-5 { animation: fadeUp 0.6s 0.5s both; }
   .anim-6 { animation: fadeUp 0.6s 0.6s both; }
-  .anim-7 { animation: fadeUp 0.6s 0.7s both; }
-
   .wiggle { animation: wiggle 3s ease-in-out infinite; }
-
-  /* SVG filter for sketchy effect */
   .svg-filters { position: absolute; width: 0; height: 0; }
-
-  /* Decorative dots */
-  .dot-deco {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--orange);
-    opacity: 0.4;
-  }
-
-  /* card animation delays */
-  .brief-card:nth-child(1) { animation-delay: 0.05s; }
-  .brief-card:nth-child(2) { animation-delay: 0.15s; }
-  .brief-card:nth-child(3) { animation-delay: 0.25s; }
-
-  /* Spinning doodle element */
-  @keyframes spin-slow {
-    from { transform: rotate(0deg); }
-    to   { transform: rotate(360deg); }
-  }
-
-  .spin { animation: spin-slow 12s linear infinite; }
-
-  /* Print hint */
-  .print-hint {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-family: var(--font-hand);
-    font-size: 13px;
-    color: var(--warm-mid);
-    margin-top: 8px;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.4s;
-  }
-
-  .print-hint.visible { opacity: 1; }
 </style>
 </head>
 <body>
-
-<!-- SVG Filters -->
 <svg class="svg-filters" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter id="sketchy" x="-5%" y="-5%" width="110%" height="110%">
@@ -645,81 +159,46 @@
     </filter>
   </defs>
 </svg>
-
 <div class="container">
-
-  <!-- HEADER -->
   <header class="anim-1">
-    <div class="header-inner">
-      <div class="logo-block">
-        <div class="logo">SPARK
-          <svg class="logo-squiggle" height="12" viewBox="0 0 300 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M2 8 C20 2, 40 12, 60 6 C80 0, 100 10, 120 5 C140 0, 160 10, 180 5 C200 0, 220 10, 240 5 C260 0, 280 8, 298 4" stroke="#E8441A" stroke-width="3" stroke-linecap="round" fill="none"/>
-          </svg>
-        </div>
-        <p class="tagline">A creative brief generator for people with too many ideas.</p>
+    <div class="logo-block">
+      <div class="logo">SPARK
+        <svg class="logo-squiggle" height="12" viewBox="0 0 300 12" fill="none">
+          <path d="M2 8 C20 2, 40 12, 60 6 C80 0, 100 10, 120 5 C140 0, 160 10, 180 5 C200 0, 220 10, 240 5 C260 0, 280 8, 298 4" stroke="#E8441A" stroke-width="3" stroke-linecap="round" fill="none"/>
+        </svg>
       </div>
+      <p class="tagline">A creative brief generator for people with too many ideas.</p>
     </div>
   </header>
-
-  <!-- BENTO GRID -->
   <div class="bento">
-
-    <!-- INTRO CELL -->
     <div class="cell cell-intro anim-2">
       <div class="cell-label">// the problem</div>
       <h2>Too many ideas.<br>Not enough starts.</h2>
       <p>Creative people don't run out of ideas. They drown in them. SPARK gives you a constrained brief, so your brain stops dithering and starts solving. Limitations aren't the enemy. They're the engine. Let's get started!</p>
       <span class="deco-arrow">→</span>
     </div>
-
-    <!-- HOW TO CELL -->
     <div class="cell cell-howto anim-3">
       <div class="cell-label">// how it works</div>
       <ul class="steps">
-        <li class="step">
-          <span class="step-num">1</span>
-          <div class="step-text"><strong>Choose your discipline</strong> Select the creative field you're working in today.</div>
-        </li>
-        <li class="step">
-          <span class="step-num">2</span>
-          <div class="step-text"><strong>Hit Generate</strong> Get 3 mission prompts + 3 limitations. Randomly drawn every time.</div>
-        </li>
-        <li class="step">
-          <span class="step-num">3</span>
-          <div class="step-text"><strong>Start the project</strong> Your first action step is right there. No excuses.</div>
-        </li>
+        <li class="step"><span class="step-num">1</span><div class="step-text"><strong>Choose your discipline</strong> Select the creative field you're working in today.</div></li>
+        <li class="step"><span class="step-num">2</span><div class="step-text"><strong>Hit Generate</strong> Get 3 mission prompts + 3 limitations. Randomly drawn every time.</div></li>
+        <li class="step"><span class="step-num">3</span><div class="step-text"><strong>Lock what you love</strong> Keep a card and re-roll the rest until the brief is right.</div></li>
       </ul>
     </div>
-
-    <!-- DISCIPLINES CELL -->
     <div class="cell cell-disciplines anim-4">
       <div class="cell-label">// pick one</div>
       <h3>Your<br>Discipline</h3>
       <div class="disc-tags" id="disc-tags">
-        <button class="disc-tag" data-disc="film" onclick="selectDisc(this)">
-          <span class="disc-icon">🎬</span> Film & Video
-        </button>
-        <button class="disc-tag" data-disc="motion" onclick="selectDisc(this)">
-          <span class="disc-icon">✦</span> Motion Graphics
-        </button>
-        <button class="disc-tag" data-disc="illustration" onclick="selectDisc(this)">
-          <span class="disc-icon">✏️</span> Illustration
-        </button>
-        <button class="disc-tag" data-disc="writing" onclick="selectDisc(this)">
-          <span class="disc-icon">📝</span> Creative Writing
-        </button>
-        <button class="disc-tag" data-disc="product" onclick="selectDisc(this)">
-          <span class="disc-icon">◎</span> Product Design
-        </button>
+        <button class="disc-tag" data-disc="film" onclick="selectDisc(this)"><span class="disc-icon">🎬</span> Film & Video</button>
+        <button class="disc-tag" data-disc="motion" onclick="selectDisc(this)"><span class="disc-icon">✦</span> Motion Graphics</button>
+        <button class="disc-tag" data-disc="illustration" onclick="selectDisc(this)"><span class="disc-icon">✏️</span> Illustration</button>
+        <button class="disc-tag" data-disc="writing" onclick="selectDisc(this)"><span class="disc-icon">📝</span> Creative Writing</button>
+        <button class="disc-tag" data-disc="product" onclick="selectDisc(this)"><span class="disc-icon">◎</span> Product Design</button>
       </div>
     </div>
-
-    <!-- DOODLE CELL -->
     <div class="cell cell-doodle anim-5">
       <div id="disc-illustration">
-        <!-- Default idle illustration -->
-        <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="wiggle">
+        <svg width="120" height="120" viewBox="0 0 120 120" fill="none" class="wiggle">
           <circle cx="60" cy="60" r="48" stroke="#1C1A16" stroke-width="2.5" stroke-dasharray="6 4"/>
           <path d="M60 20 L64 52 L96 60 L64 68 L60 100 L56 68 L24 60 L56 52 Z" fill="#E8441A" opacity="0.85"/>
           <circle cx="60" cy="60" r="6" fill="#1C1A16"/>
@@ -728,464 +207,214 @@
         <p class="doodle-text">waiting for<br>your pick...</p>
       </div>
     </div>
-
-    <!-- GENERATOR CELL -->
     <div class="cell cell-generator anim-6">
       <div class="gen-top">
         <span class="gen-top-label">// your brief</span>
-        <span class="gen-disc-badge" id="disc-badge">Film & Video</span>
+        <span class="gen-disc-badge" id="disc-badge"></span>
       </div>
       <div class="gen-body" id="gen-body">
-        <div class="gen-placeholder" id="gen-placeholder">
+        <div class="gen-placeholder">
           <div class="big-spark">✦</div>
           <p>Select a discipline and hit Generate to get your brief.</p>
         </div>
       </div>
       <div class="gen-footer">
-        <button class="btn-generate" id="btn-generate" onclick="generateBrief()" disabled>
-          ✦ Generate Brief
-        </button>
+        <button class="btn-generate" id="btn-generate" onclick="generateBrief()" disabled>✦ Generate Brief</button>
         <span class="btn-hint" id="btn-hint">← pick a discipline first</span>
-        <div class="print-hint" id="print-hint">
-          <span>📋</span> Screenshot or Cmd+P to save your brief
-        </div>
+        <div class="print-hint" id="print-hint"><span>📋</span> Screenshot or Cmd+P to save your brief</div>
       </div>
     </div>
-
-
-
-  </div><!-- /bento -->
-
-  <footer>
-  </footer>
-
-</div><!-- /container -->
-
+  </div>
+  <footer></footer>
+</div>
 <script>
-// ─────────────────────────────────────────────
-//  CONTENT LIBRARY
-// ─────────────────────────────────────────────
+const LOCK_SVG = `
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <class class="icon-unlocked">
+      <rect class="icon-unlocked" x="3" y="11" width="18" height="11" rx="2"/>
+      <path class="icon-unlocked" d="M7 11V7a5 5 0 0 1 9.9-1"/>
+    </class>
+    <g class="icon-locked">
+      <rect x="3" y="11" width="18" height="11" rx="2"/>
+      <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+    </g>
+  </svg>`;
+
+// We'll manage lock state with a simple object
+const locks = { what: false, who: false, why: false, dont0: false, dont1: false, dont2: false, action: false };
+const values = { what: '', who: '', why: '', dont0: '', dont1: '', dont2: '', action: '' };
 
 const library = {
   film: {
     name: "Film & Video",
-    color: "#2B4A8C",
-    illustration: `<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="15" y="35" width="90" height="55" rx="4" stroke="#1C1A16" stroke-width="2.5" fill="#EDE8DE"/>
-      <circle cx="38" cy="62" r="14" stroke="#1C1A16" stroke-width="2" fill="#2B4A8C" opacity="0.7"/>
-      <circle cx="38" cy="62" r="5" fill="#1C1A16"/>
-      <line x1="80" y1="40" x2="80" y2="85" stroke="#1C1A16" stroke-width="1.5"/>
-      <rect x="85" y="45" width="12" height="8" rx="2" fill="#E8441A"/>
-      <rect x="85" y="57" width="12" height="8" rx="2" fill="#E8441A"/>
-      <rect x="85" y="69" width="12" height="8" rx="2" fill="#E8441A"/>
-      <path d="M10 28 L20 35" stroke="#1C1A16" stroke-width="2" stroke-linecap="round"/>
-      <path d="M25 25 L28 35" stroke="#1C1A16" stroke-width="2" stroke-linecap="round"/>
-      <path d="M40 23 L36 35" stroke="#1C1A16" stroke-width="2" stroke-linecap="round"/>
-    </svg>`,
-    what: [
-      "a short film about a daily ritual",
-      "a silent documentary",
-      "a video portrait of a stranger",
-      "a one-location drama",
-      "a found-footage experiment",
-      "a video essay without a narrator",
-      "a time-lapse narrative",
-      "a film that begins at the end",
-      "a two-character piece with no dialogue",
-      "a day-in-the-life film from an unusual POV",
-      "a film made entirely in one take",
-      "a visual response to a piece of music",
-    ],
-    who: [
-      "for someone who has never left their town",
-      "for a person experiencing something for the first time",
-      "for an audience of exactly one",
-      "for people who are afraid of the dark",
-      "for children who ask too many questions",
-      "for night shift workers",
-      "for people going through a transition",
-      "for an audience that doesn't speak your language",
-    ],
-    why: [
-      "to make the invisible visible",
-      "to provoke discomfort in a safe way",
-      "to document what is about to disappear",
-      "to make the ordinary feel extraordinary",
-      "to start a conversation that words can't",
-      "to change how someone sees a familiar place",
-      "to capture a feeling that has no name",
-    ],
-    donts: [
-      "Don't use a tripod — ever.",
-      "Don't show a single human face.",
-      "Don't use any music.",
-      "Don't include any dialogue.",
-      "Don't shoot in colour.",
-      "Don't use any cuts — one continuous shot only.",
-      "Don't use any artificial lighting.",
-      "Don't show the main subject until the final third.",
-      "Don't shoot anything wider than a close-up.",
-      "Don't use any footage shot after sunrise or before sunset.",
-      "Don't include anything man-made.",
-      "Don't shoot in a location you've been to before.",
-    ],
-    actions: [
-      "Set a timer for 20 minutes and write down every visual that comes to mind. Pick the strangest one.",
-      "Walk outside right now and film the first moving thing you see. Watch it back. That's your opening shot.",
-      "Draw a rough storyboard of just 5 frames. Start with the last frame first.",
-    ]
+    illustration: `<svg width="120" height="120" viewBox="0 0 120 120" fill="none"><rect x="15" y="35" width="90" height="55" rx="4" stroke="#1C1A16" stroke-width="2.5" fill="#EDE8DE"/><circle cx="38" cy="62" r="14" stroke="#1C1A16" stroke-width="2" fill="#2B4A8C" opacity="0.7"/><circle cx="38" cy="62" r="5" fill="#1C1A16"/><line x1="80" y1="40" x2="80" y2="85" stroke="#1C1A16" stroke-width="1.5"/><rect x="85" y="45" width="12" height="8" rx="2" fill="#E8441A"/><rect x="85" y="57" width="12" height="8" rx="2" fill="#E8441A"/><rect x="85" y="69" width="12" height="8" rx="2" fill="#E8441A"/><path d="M10 28 L20 35" stroke="#1C1A16" stroke-width="2" stroke-linecap="round"/><path d="M25 25 L28 35" stroke="#1C1A16" stroke-width="2" stroke-linecap="round"/><path d="M40 23 L36 35" stroke="#1C1A16" stroke-width="2" stroke-linecap="round"/></svg>`,
+    what: ["a short film about a daily ritual","a silent documentary","a video portrait of a stranger","a one-location drama","a found-footage experiment","a video essay without a narrator","a time-lapse narrative","a film that begins at the end","a two-character piece with no dialogue","a day-in-the-life film from an unusual POV","a film made entirely in one take","a visual response to a piece of music","a film about something that takes exactly 60 seconds to happen","a documentary about a single object","a film told entirely in reflections","a portrait of a place in the hour before it changes forever","a film about the space between two people","a visual diary of one week shot only between 6am and 7am","a film about waiting — real, unscripted waiting","a narrative told entirely through hands","a film where the camera never moves","a portrait of a skill nobody under 40 still has","a film in which the subject never appears on screen","a short about the last time something happened","a film about a journey where the destination is never shown"],
+    who: ["for someone who has never left their town","for a person experiencing something for the first time","for an audience of exactly one","for people who are afraid of the dark","for children who ask too many questions","for night shift workers","for people going through a transition","for an audience that doesn't speak your language","for someone who stopped making things and doesn't know why","for a person who thinks cinema is not for them","for an elderly relative who has never been filmed","for someone who just moved to a new city","for people who find silence unbearable","for someone watching on a phone with the sound off","for a person who has lost their sense of direction"],
+    why: ["to make the invisible visible","to provoke discomfort in a safe way","to document what is about to disappear","to make the ordinary feel extraordinary","to start a conversation that words can't","to change how someone sees a familiar place","to capture a feeling that has no name","to force the viewer to slow down","to make a person feel seen without showing their face","to turn a private experience into a shared one","to find beauty in something everyone overlooks","to make someone reconsider a decision they've already made","to leave the viewer with more questions than they arrived with","to honour something before it disappears"],
+    donts: ["Don't use a tripod — ever.","Don't show a single human face.","Don't use any music.","Don't include any dialogue.","Don't shoot in colour.","Don't use any cuts — one continuous shot only.","Don't use any artificial lighting.","Don't show the main subject until the final third.","Don't shoot anything wider than a close-up.","Don't use any footage shot after sunrise or before sunset.","Don't include anything man-made.","Don't shoot in a location you've been to before.","Don't use any camera movement — lock off only.","Don't show the sky.","Don't include any text on screen.","Don't use a lens wider than 50mm.","Don't shoot indoors.","Don't show anyone who knows they're being filmed.","Don't use real-time speed — slow or fast only.","Don't show the beginning or end of any action.","Don't use sound recorded on the day.","Don't show anything in focus — soft focus throughout.","Don't include a single straight line in any frame."],
+    actions: ["Set a timer for 20 minutes and write down every visual that comes to mind. Pick the strangest one.","Walk outside right now and film the first moving thing you see. Watch it back. That's your opening shot.","Draw a rough storyboard of just 5 frames. Start with the last frame first.","Find a location within walking distance. Go there. Stand in it for 5 minutes before you film anything.","Identify the single emotion you want the viewer to feel in the last 10 seconds. Work backwards from there.","List three things you've never filmed before. Pick one. That's your subject.","Write a one-sentence treatment — subject, action, feeling. Pin it somewhere you can see it while you shoot.","Find a piece of music that captures the mood you want. Play it on a loop while you plan. Don't use it in the film.","Name the one rule from your Don't list that frightens you most. Start there."]
   },
-
   motion: {
     name: "Motion Graphics",
-    color: "#D4547A",
-    illustration: `<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="60" cy="60" r="30" stroke="#1C1A16" stroke-width="2.5" fill="none"/>
-      <path d="M60 30 L60 90" stroke="#D4547A" stroke-width="2" stroke-dasharray="4 3"/>
-      <path d="M30 60 L90 60" stroke="#D4547A" stroke-width="2" stroke-dasharray="4 3"/>
-      <circle cx="60" cy="30" r="7" fill="#E8441A"/>
-      <circle cx="90" cy="60" r="7" fill="#1C1A16"/>
-      <circle cx="60" cy="90" r="7" fill="#3D6B4F"/>
-      <circle cx="30" cy="60" r="7" fill="#E8C84A"/>
-      <path d="M75 45 Q85 35 95 25" stroke="#1C1A16" stroke-width="1.5" stroke-linecap="round" marker-end="url(#arr)"/>
-    </svg>`,
-    what: [
-      "a kinetic type piece about a single word",
-      "a looping animation with no start or end",
-      "a data visualisation that tells a story",
-      "an abstract animation that evokes a specific emotion",
-      "a motion piece for a product that doesn't exist",
-      "a title sequence for a film that will never be made",
-      "an animated manifesto",
-      "a shape-based narrative with no text",
-      "a 10-second identity for a fictional organisation",
-      "an animation that responds to a piece of music visually",
-    ],
-    who: [
-      "for people with insomnia",
-      "for someone waiting for test results",
-      "for children learning to count",
-      "for a waiting room with no sound",
-      "for people who think in diagrams",
-      "for an audience watching on a billboard",
-      "for someone in the middle of a decision",
-    ],
-    why: [
-      "to make abstract data feel human",
-      "to create a feeling without using words",
-      "to make time feel elastic",
-      "to explain something in under 10 seconds",
-      "to make someone feel part of something larger",
-      "to turn a system into an experience",
-    ],
-    donts: [
-      "Don't use more than two colours.",
-      "Don't use any easing — all movements must be linear.",
-      "Don't include any text.",
-      "Don't use any curves — straight lines and angles only.",
-      "Don't let anything stop moving.",
-      "Don't use the same shape twice.",
-      "Don't use white as a colour.",
-      "Don't use any transitions longer than 0.3 seconds.",
-      "Don't use any symmetry.",
-      "Don't allow anything to leave the frame.",
-    ],
-    actions: [
-      "Sketch the first and last frame on paper right now. Everything in between is just the journey.",
-      "Pick one shape. Set a timer for 15 minutes and explore every way that shape can move.",
-      "Write the emotional arc in three words. Let those words be your only brief.",
-    ]
+    illustration: `<svg width="120" height="120" viewBox="0 0 120 120" fill="none"><circle cx="60" cy="60" r="30" stroke="#1C1A16" stroke-width="2.5" fill="none"/><path d="M60 30 L60 90" stroke="#D4547A" stroke-width="2" stroke-dasharray="4 3"/><path d="M30 60 L90 60" stroke="#D4547A" stroke-width="2" stroke-dasharray="4 3"/><circle cx="60" cy="30" r="7" fill="#E8441A"/><circle cx="90" cy="60" r="7" fill="#1C1A16"/><circle cx="60" cy="90" r="7" fill="#3D6B4F"/><circle cx="30" cy="60" r="7" fill="#E8C84A"/></svg>`,
+    what: ["a kinetic type piece about a single word","a looping animation with no start or end","a data visualisation that tells a story","an abstract animation that evokes a specific emotion","a motion piece for a product that doesn't exist","a title sequence for a film that will never be made","an animated manifesto","a shape-based narrative with no text","a 10-second identity for a fictional organisation","an animation that responds to a piece of music visually","a countdown that makes time feel precious","a motion piece that visualises a natural system — tides, wind, growth","a 15-second ad for an emotion","an animated diagram of something that can't actually be diagrammed","a motion piece made of only the things that are usually left out","a looping animation of a single object transforming endlessly","a motion piece about the moment just before something begins","a typographic piece using only punctuation","a motion graphic that tells a joke without words","a piece that visualises a conversation between two forces","a motion piece about acceleration and deceleration","an animated logo for a brand with one rule: no straight lines","a motion piece about scale — from the microscopic to the enormous","a piece made of only things that appear in nature"],
+    who: ["for people with insomnia","for someone waiting for test results","for children learning to count","for a waiting room with no sound","for people who think in diagrams","for an audience watching on a billboard","for someone in the middle of a decision","for a person who claims they don't understand art","for someone watching on a screen smaller than a playing card","for people who are overwhelmed by information","for a child who has just learned to read","for someone watching across a crowded room","for a person who has just experienced something they can't explain","for people who need to be reminded to breathe"],
+    why: ["to make abstract data feel human","to create a feeling without using words","to make time feel elastic","to explain something in under 10 seconds","to make someone feel part of something larger","to turn a system into an experience","to make a complex idea feel obvious","to turn anxiety into something beautiful","to make something boring feel urgent","to make the viewer aware of their own heartbeat","to reduce a big idea to its purest visual form","to make the viewer feel movement in their own body","to create a sense of something just out of reach"],
+    donts: ["Don't use more than two colours.","Don't use any easing — all movements must be linear.","Don't include any text.","Don't use any curves — straight lines and angles only.","Don't let anything stop moving.","Don't use the same shape twice.","Don't use white as a colour.","Don't use any transitions longer than 0.3 seconds.","Don't use any symmetry.","Don't allow anything to leave the frame.","Don't use any gradient — flat colour only.","Don't use any shape with more than four sides.","Don't allow any two elements to touch.","Don't use any animation that takes longer than 1 second.","Don't use any colour that appears in nature.","Don't start any motion from a stationary position — everything already moving.","Don't use a canvas ratio other than 1:1.","Don't use any element larger than 20% of the canvas.","Don't use any motion that repeats exactly.","Don't use any opacity other than 100% or 0%."],
+    actions: ["Sketch the first and last frame on paper right now. Everything in between is just the journey.","Pick one shape. Set a timer for 15 minutes and explore every way that shape can move.","Write the emotional arc in three words. Let those words be your only brief.","Find a real-world reference — not motion design — that has the feel you want. A painting, a photograph, a texture. Pin it up.","Build the first 2 seconds only. If those 2 seconds work, the rest will follow.","Define your timing before you touch the software. Write out the beat structure on paper first.","Name your piece before you make it. The title will tell you what it needs to be.","Find one constraint from your Don't list that you've never tried before. Start there, not at the safe end.","Make a rough, ugly version at 10x speed. Get all the decisions made badly first, then make them well."]
   },
-
   illustration: {
     name: "Illustration",
-    color: "#3D6B4F",
-    illustration: `<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M20 95 Q30 40, 60 25 Q90 10, 100 35 Q110 55, 80 65 Q60 72, 55 95 Z" stroke="#1C1A16" stroke-width="2.5" fill="#EDE8DE"/>
-      <path d="M55 95 Q58 75, 70 60" stroke="#E8441A" stroke-width="2" stroke-linecap="round" stroke-dasharray="3 3"/>
-      <circle cx="85" cy="40" r="8" fill="#3D6B4F" opacity="0.7"/>
-      <path d="M30 75 Q40 65, 50 70" stroke="#1C1A16" stroke-width="2" stroke-linecap="round"/>
-      <path d="M55 50 Q60 45, 65 50 Q60 58, 55 50Z" fill="#E8C84A"/>
-      <circle cx="40" cy="55" r="3" fill="#D4547A"/>
-      <path d="M15 90 Q12 95, 15 98 Q20 100, 22 96" stroke="#1C1A16" stroke-width="1.5" stroke-linecap="round"/>
-    </svg>`,
-    what: [
-      "an illustration of a place that only exists in memory",
-      "a portrait of an emotion, not a person",
-      "a map of somewhere that doesn't exist",
-      "an illustrated instructions manual for a feeling",
-      "a single scene that contains an entire story",
-      "an illustration of a sound",
-      "a visual interpretation of a recipe",
-      "a landscape where the rules of physics are slightly wrong",
-      "an illustration of a conversation you overheard",
-      "a character study of a non-human thing",
-    ],
-    who: [
-      "for someone who can't read",
-      "for a person who has never seen colour",
-      "for a reader in a hurry",
-      "for someone who collects things they find on the ground",
-      "for a child who asks 'why' too much",
-      "for a person who only reads at night",
-      "for someone who is very, very old",
-    ],
-    why: [
-      "to make the invisible feel touchable",
-      "to document what words can't say",
-      "to provoke a specific kind of quiet",
-      "to make the ordinary look strange",
-      "to make the strange look ordinary",
-      "to communicate across a language barrier",
-      "to preserve a moment before it disappears",
-    ],
-    donts: [
-      "Don't use black outlines.",
-      "Don't work digitally — physical medium only.",
-      "Don't illustrate a recognisable human form.",
-      "Don't use more than three colours.",
-      "Don't use any horizontal or vertical lines.",
-      "Don't show the most important thing directly — only its shadow or trace.",
-      "Don't leave any white space.",
-      "Don't use any scale that makes sense.",
-      "Don't add any text, labels, or titles.",
-      "Don't use your dominant hand.",
-    ],
-    actions: [
-      "Make a tiny, rough thumbnail right now — no bigger than a stamp. This is your composition. It's already decided.",
-      "Pick your constraint that scares you most. Start there. Not at the safe end.",
-      "Gather three physical references — not from screens — before you begin.",
-    ]
+    illustration: `<svg width="120" height="120" viewBox="0 0 120 120" fill="none"><path d="M20 95 Q30 40, 60 25 Q90 10, 100 35 Q110 55, 80 65 Q60 72, 55 95 Z" stroke="#1C1A16" stroke-width="2.5" fill="#EDE8DE"/><path d="M55 95 Q58 75, 70 60" stroke="#E8441A" stroke-width="2" stroke-linecap="round" stroke-dasharray="3 3"/><circle cx="85" cy="40" r="8" fill="#3D6B4F" opacity="0.7"/><path d="M30 75 Q40 65, 50 70" stroke="#1C1A16" stroke-width="2" stroke-linecap="round"/><path d="M55 50 Q60 45, 65 50 Q60 58, 55 50Z" fill="#E8C84A"/><circle cx="40" cy="55" r="3" fill="#D4547A"/></svg>`,
+    what: ["an illustration of a place that only exists in memory","a portrait of an emotion, not a person","a map of somewhere that doesn't exist","an illustrated instructions manual for a feeling","a single scene that contains an entire story","an illustration of a sound","a visual interpretation of a recipe","a landscape where the rules of physics are slightly wrong","an illustration of a conversation you overheard","a character study of a non-human thing","an illustrated taxonomy of a single object in all its variations","a cross-section of something that can't actually be cut open","a portrait of someone from only the objects they own","an illustration of a smell","a map of a journey that happened entirely in someone's head","an illustration of a relationship without showing any people","a scene set five minutes after something significant happened","an illustrated field guide to imaginary creatures","a portrait of a city using only its shadows","an illustration of the same moment from three different heights","a picture of something that no longer exists, from memory","an illustration of what silence looks like in a specific place","a visual recipe for a feeling you've had more than once","an illustrated letter from one inanimate object to another"],
+    who: ["for someone who can't read","for a person who has never seen colour","for a reader in a hurry","for someone who collects things they find on the ground","for a child who asks 'why' too much","for a person who only reads at night","for someone who is very, very old","for a person who doesn't believe in nostalgia","for someone who is learning to pay attention","for a person who has just lost something and isn't ready to talk about it","for someone who finds words insufficient","for a child who is afraid of the wrong things","for a person encountering your culture for the first time","for someone who needs proof that small things matter"],
+    why: ["to make the invisible feel touchable","to document what words can't say","to provoke a specific kind of quiet","to make the ordinary look strange","to make the strange look ordinary","to communicate across a language barrier","to preserve a moment before it disappears","to make a viewer feel something they haven't felt since childhood","to slow down a reader who always skips the pictures","to make the complex feel intimate","to find the humour in something people take too seriously","to make an argument without using a single word","to give shape to something everyone recognises but nobody has drawn before"],
+    donts: ["Don't use black outlines.","Don't work digitally — physical medium only.","Don't illustrate a recognisable human form.","Don't use more than three colours.","Don't use any horizontal or vertical lines.","Don't show the most important thing directly — only its shadow or trace.","Don't leave any white space.","Don't use any scale that makes sense.","Don't add any text, labels, or titles.","Don't use your dominant hand.","Don't use any tool designed for illustration — found objects, food, or household items only.","Don't use a white background.","Don't include any living thing.","Don't use any line thicker than 1mm.","Don't illustrate anything that exists at human scale — go micro or macro.","Don't use any colour you've used in the last three pieces you made.","Don't use a rectangular canvas.","Don't plan before you begin — first mark is made without thinking.","Don't use any mark that is repeated exactly.","Don't show any light source or cast shadow."],
+    actions: ["Make a tiny, rough thumbnail right now — no bigger than a stamp. This is your composition. It's already decided.","Pick your constraint that scares you most. Start there. Not at the safe end.","Gather three physical references — not from screens — before you begin.","Do one warm-up piece: set a 5-minute timer and draw the subject with your non-dominant hand. Look at it. Your real piece now knows what to avoid.","Write the single most important visual decision in your brief in one sentence. Stick it above your workspace.","Find the exact colour palette by looking at physical objects in the room, not colour pickers.","Draw a border first. Everything happens inside it.","Identify the one thing the illustration must communicate if the viewer only looks for 3 seconds. Make that element first.","Tear, cut, or fold your paper before you begin. The surface is already interesting."]
   },
-
   writing: {
     name: "Creative Writing",
-    color: "#8C7B5E",
-    illustration: `<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="20" y="18" width="68" height="85" rx="3" stroke="#1C1A16" stroke-width="2.5" fill="#EDE8DE"/>
-      <line x1="32" y1="38" x2="76" y2="38" stroke="#1C1A16" stroke-width="1.5" stroke-linecap="round"/>
-      <line x1="32" y1="50" x2="76" y2="50" stroke="#1C1A16" stroke-width="1.5" stroke-linecap="round"/>
-      <line x1="32" y1="62" x2="60" y2="62" stroke="#1C1A16" stroke-width="1.5" stroke-linecap="round"/>
-      <line x1="32" y1="74" x2="72" y2="74" stroke="#8C7B5E" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="3 2"/>
-      <path d="M68 62 L88 42 L95 49 L75 69 Z" fill="#E8441A" stroke="#1C1A16" stroke-width="1.5"/>
-      <path d="M68 62 L64 76 L75 69 Z" fill="#1C1A16"/>
-      <path d="M88 42 L95 35 L100 40 L95 49 Z" fill="#E8C84A" stroke="#1C1A16" stroke-width="1"/>
-    </svg>`,
-    what: [
-      "a short story told entirely in second person",
-      "a piece of flash fiction under 300 words",
-      "a monologue for a character who is wrong about everything",
-      "a letter from an object to its owner",
-      "a story that begins with the last sentence first",
-      "a scene between two characters who want the same thing",
-      "a piece of writing about a place you've never been",
-      "a story where the narrator is unreliable in an obvious way",
-      "a micro-essay about something nobody talks about",
-      "a story in which nothing happens, but everything changes",
-    ],
-    who: [
-      "for someone who just made a mistake",
-      "for a person who has lost something they can't name",
-      "for a reader on a long train journey",
-      "for someone who has just woken up",
-      "for a person who is about to begin something new",
-      "for a reader who doesn't trust words",
-      "for someone waiting for something that may not come",
-    ],
-    why: [
-      "to make a reader feel less alone",
-      "to say the thing everyone is thinking but won't say",
-      "to make the mundane feel enormous",
-      "to give language to something that resists language",
-      "to slow the reader down",
-      "to change how someone reads the next thing they read",
-    ],
-    donts: [
-      "Don't use the word 'I'.",
-      "Don't write in chronological order.",
-      "Don't exceed 250 words.",
-      "Don't use a single adjective.",
-      "Don't name any character.",
-      "Don't describe anyone's physical appearance.",
-      "Don't use any dialogue.",
-      "Don't begin any sentence with 'The'.",
-      "Don't resolve the central tension.",
-      "Don't use any punctuation except full stops.",
-    ],
-    actions: [
-      "Write the last line first. Right now, before anything else. Everything else is just arriving at it.",
-      "Set a 10-minute timer. Write without stopping, crossing out, or re-reading. Your first draft is already done.",
-      "Read your brief out loud to yourself twice. The images it produces in your head are your story.",
-    ]
+    illustration: `<svg width="120" height="120" viewBox="0 0 120 120" fill="none"><rect x="20" y="18" width="68" height="85" rx="3" stroke="#1C1A16" stroke-width="2.5" fill="#EDE8DE"/><line x1="32" y1="38" x2="76" y2="38" stroke="#1C1A16" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="50" x2="76" y2="50" stroke="#1C1A16" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="62" x2="60" y2="62" stroke="#1C1A16" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="74" x2="72" y2="74" stroke="#8C7B5E" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="3 2"/><path d="M68 62 L88 42 L95 49 L75 69 Z" fill="#E8441A" stroke="#1C1A16" stroke-width="1.5"/><path d="M68 62 L64 76 L75 69 Z" fill="#1C1A16"/><path d="M88 42 L95 35 L100 40 L95 49 Z" fill="#E8C84A" stroke="#1C1A16" stroke-width="1"/></svg>`,
+    what: ["a short story told entirely in second person","a piece of flash fiction under 300 words","a monologue for a character who is wrong about everything","a letter from an object to its owner","a story that begins with the last sentence first","a scene between two characters who want the same thing","a piece of writing about a place you've never been","a story where the narrator is unreliable in an obvious way","a micro-essay about something nobody talks about","a story in which nothing happens, but everything changes","a monologue from the perspective of a habit","a piece of writing that describes a sound without naming it","a story told entirely through a list","a scene in which the most important character never speaks","a piece written as a series of instructions for something that can't be instructed","a letter that was never sent and explains exactly why","a short story set entirely in the moment before a decision","a piece that describes the same event from two incompatible perspectives — in the same voice","a story about an ordinary Tuesday that turns out to be the last of something","a monologue in which every sentence contradicts the one before it","a piece of writing that starts in the middle of an argument already in progress","a short story told entirely through what a character notices, never what they think","a micro-essay about the gap between what we say and what we mean","a story told entirely in the present tense, about the past"],
+    who: ["for someone who just made a mistake","for a person who has lost something they can't name","for a reader on a long train journey","for someone who has just woken up","for a person who is about to begin something new","for a reader who doesn't trust words","for someone waiting for something that may not come","for a person who thinks nothing interesting ever happens to them","for someone reading in a language that isn't their first","for a person who gave up on something years ago and still thinks about it","for a reader who skips to the last page first","for someone sitting alone in a public place","for a person who needs to be told something true in a roundabout way","for someone who has been carrying a story they've never told"],
+    why: ["to make a reader feel less alone","to say the thing everyone is thinking but won't say","to make the mundane feel enormous","to give language to something that resists language","to slow the reader down","to change how someone reads the next thing they read","to make a reader aware of their own body","to capture the exact texture of a specific kind of regret","to make time feel like it's moving at the wrong speed","to make the reader feel complicit in what happens","to say goodbye to something without calling it a goodbye","to make one small, overlooked thing feel like it matters enormously","to put into words something the reader has felt but never articulated"],
+    donts: ["Don't use the word 'I'.","Don't write in chronological order.","Don't exceed 250 words.","Don't use a single adjective.","Don't name any character.","Don't describe anyone's physical appearance.","Don't use any dialogue.","Don't begin any sentence with 'The'.","Don't resolve the central tension.","Don't use any punctuation except full stops.","Don't use any word longer than two syllables.","Don't use the past tense.","Don't use any metaphors or similes.","Don't write about a human being at all.","Don't use a single proper noun.","Don't write more than one sentence per paragraph.","Don't begin with the subject of the piece.","Don't use any word more than once.","Don't use the word 'and'.","Don't use any form of the verb 'to be'."],
+    actions: ["Write the last line first. Right now, before anything else. Everything else is just arriving at it.","Set a 10-minute timer. Write without stopping, crossing out, or re-reading. Your first draft is already done.","Read your brief out loud to yourself twice. The images it produces in your head are your story.","Write the one sentence that the piece is really about — the one you're not allowed to include in the text.","Find a real object near you that relates to your brief. Hold it. Write the first sentence about it.","Identify the emotion at the centre of your piece. Write a list of 10 things that feel nothing like it. Now find the one that secretly does.","Write the opening line three different ways. Pick the one you'd least expect yourself to write.","Set a word limit lower than your brief suggests. Half. Now write to it.","Write the piece as if the reader already knows the ending. What changes?"]
   },
-
   product: {
     name: "Product Design",
-    color: "#E8C84A",
-    illustration: `<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="30" y="50" width="60" height="45" rx="5" stroke="#1C1A16" stroke-width="2.5" fill="#EDE8DE"/>
-      <path d="M40 50 L40 35 Q40 25, 60 25 Q80 25, 80 35 L80 50" stroke="#1C1A16" stroke-width="2.5" fill="none"/>
-      <circle cx="60" cy="72" r="10" stroke="#1C1A16" stroke-width="2" fill="#E8441A" opacity="0.8"/>
-      <circle cx="60" cy="72" r="3" fill="#1C1A16"/>
-      <path d="M95 30 L105 20 M95 45 L108 45 M95 60 L105 70" stroke="#1C1A16" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="2 2"/>
-      <path d="M20 42 Q15 55, 20 68" stroke="#3D6B4F" stroke-width="2" stroke-linecap="round"/>
-    </svg>`,
-    what: [
-      "a product for a ritual that happens every morning",
-      "a tool for a problem nobody admits they have",
-      "a physical object that helps people do less",
-      "a product for the transition between two states",
-      "a tool that works better when it breaks",
-      "a product designed around a single, specific failure",
-      "a kit for a skill that is disappearing",
-      "a product that makes waiting feel useful",
-      "a physical tool for a digital behaviour",
-      "a product designed to last exactly one year",
-    ],
-    who: [
-      "for people with one working hand",
-      "for someone in a shared space with no privacy",
-      "for a person who is always running late",
-      "for someone who has given up on instructions",
-      "for a person whose hands shake",
-      "for someone who refuses to read manuals",
-      "for people who use things in the wrong way",
-    ],
-    why: [
-      "to reduce a decision to a single action",
-      "to make an invisible problem visible",
-      "to replace a digital behaviour with a physical one",
-      "to make care visible and tangible",
-      "to slow down a process that happens too fast",
-      "to make something that normally requires effort feel effortless",
-    ],
-    donts: [
-      "Don't use plastic in any form.",
-      "Don't design for able-bodied users only.",
-      "Don't solve a problem that already has a good solution.",
-      "Don't use a screen, display, or digital interface.",
-      "Don't create anything that requires a power source.",
-      "Don't design for a table or flat surface.",
-      "Don't make it adjustable — one size, one configuration.",
-      "Don't use any fasteners: no screws, clips, or adhesives.",
-      "Don't make it smaller than a fist.",
-      "Don't design for indoor use only.",
-    ],
-    actions: [
-      "Sketch 6 completely different forms in 6 minutes. Set a timer. Don't judge. Pick the one that surprises you.",
-      "Find a physical object near you that partially solves your problem. Your design starts from its failure point.",
-      "Write one sentence: 'A person uses this when they feel ___.' That's your design brief.",
-    ]
+    illustration: `<svg width="120" height="120" viewBox="0 0 120 120" fill="none"><rect x="30" y="50" width="60" height="45" rx="5" stroke="#1C1A16" stroke-width="2.5" fill="#EDE8DE"/><path d="M40 50 L40 35 Q40 25, 60 25 Q80 25, 80 35 L80 50" stroke="#1C1A16" stroke-width="2.5" fill="none"/><circle cx="60" cy="72" r="10" stroke="#1C1A16" stroke-width="2" fill="#E8441A" opacity="0.8"/><circle cx="60" cy="72" r="3" fill="#1C1A16"/><path d="M95 30 L105 20 M95 45 L108 45 M95 60 L105 70" stroke="#1C1A16" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="2 2"/><path d="M20 42 Q15 55, 20 68" stroke="#3D6B4F" stroke-width="2" stroke-linecap="round"/></svg>`,
+    what: ["a product for a ritual that happens every morning","a tool for a problem nobody admits they have","a physical object that helps people do less","a product for the transition between two states","a tool that works better when it breaks","a product designed around a single, specific failure","a kit for a skill that is disappearing","a product that makes waiting feel useful","a physical tool for a digital behaviour","a product designed to last exactly one year","a tool that requires two people to use","a product for a problem that only exists in shared spaces","a physical object that helps someone let go of something","a product that makes an invisible process visible","a tool for a task that people always do wrong","a product that works differently depending on the weather","a physical object designed to be destroyed in the process of use","a kit for a five-minute daily practice","a product that only works when used slowly","a tool designed for the moments between tasks","a physical object that records something without a screen","a product for a shared experience between strangers","a tool that improves with age and use","a product for the last five minutes before sleep"],
+    who: ["for people with one working hand","for someone in a shared space with no privacy","for a person who is always running late","for someone who has given up on instructions","for a person whose hands shake","for someone who refuses to read manuals","for people who use things in the wrong way","for a person who has too many things","for someone who lives alone and likes it","for a person who is very good at starting and very bad at finishing","for someone whose work leaves marks on their hands","for a person who carries everything they need in one bag","for someone learning a physical skill for the first time at 50","for a person who doesn't notice they need something until it's gone"],
+    why: ["to reduce a decision to a single action","to make an invisible problem visible","to replace a digital behaviour with a physical one","to make care visible and tangible","to slow down a process that happens too fast","to make something that normally requires effort feel effortless","to make an interruption feel like a ritual","to create a physical record of something that usually leaves no trace","to make a person feel capable of something they thought required expertise","to turn a solitary activity into a shared one","to reduce the distance between an intention and an action","to give physical form to something that currently only exists as a habit","to make a person more aware of how they use their time"],
+    donts: ["Don't use plastic in any form.","Don't design for able-bodied users only.","Don't solve a problem that already has a good solution.","Don't use a screen, display, or digital interface.","Don't create anything that requires a power source.","Don't design for a table or flat surface.","Don't make it adjustable — one size, one configuration.","Don't use any fasteners: no screws, clips, or adhesives.","Don't make it smaller than a fist.","Don't design for indoor use only.","Don't use any material that is manufactured — natural materials only.","Don't make anything that can be used incorrectly.","Don't design anything that requires two hands.","Don't use any colour — natural material finish only.","Don't make anything that needs to be cleaned.","Don't make it lighter than 200g.","Don't design anything with more than one component.","Don't design for a specific age group.","Don't make anything with sharp edges or corners.","Don't design anything that can be improved with a second version — this is the final form."],
+    actions: ["Sketch 6 completely different forms in 6 minutes. Set a timer. Don't judge. Pick the one that surprises you.","Find a physical object near you that partially solves your problem. Your design starts from its failure point.","Write one sentence: 'A person uses this when they feel ___.' That's your design brief.","Go and do the task your product is meant to help with, right now, without the product. Note exactly where it breaks down.","Find three objects made from your chosen material. Hold them. Your form language is already in your hands.","Draw the object at 1:1 scale on paper. Cut it out. Hold the paper version. Does the size feel right?","Write a one-paragraph user scenario — not a persona, a moment. A specific person, a specific Tuesday, a specific need.","Identify the single interaction — the touch, the fold, the pour — that the whole product is built around. Prototype just that.","List five ways the product could fail. Design out the most likely one first."]
   }
 };
 
-// ─────────────────────────────────────────────
-//  STATE
-// ─────────────────────────────────────────────
 let selectedDisc = null;
-let hasGenerated = false;
+let generated = false;
 
-// ─────────────────────────────────────────────
-//  HELPERS
-// ─────────────────────────────────────────────
-function pick(arr) {
-  return arr[Math.floor(Math.random() * arr.length)];
-}
+function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+function pickN(arr, n) { return [...arr].sort(() => Math.random() - 0.5).slice(0, n); }
 
-function pickN(arr, n) {
-  const shuffled = [...arr].sort(() => Math.random() - 0.5);
-  return shuffled.slice(0, n);
-}
-
-// ─────────────────────────────────────────────
-//  DISCIPLINE SELECTION
-// ─────────────────────────────────────────────
 function selectDisc(btn) {
-  // Remove active from all
   document.querySelectorAll('.disc-tag').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   selectedDisc = btn.dataset.disc;
-
   const disc = library[selectedDisc];
-
-  // Update badge
-  const badge = document.getElementById('disc-badge');
-  badge.textContent = disc.name;
-  badge.classList.add('visible');
-
-  // Enable button
-  const genBtn = document.getElementById('btn-generate');
-  genBtn.disabled = false;
-
-  const hint = document.getElementById('btn-hint');
-  hint.textContent = '← ready to generate!';
-
-  // Update illustration
-  document.getElementById('disc-illustration').innerHTML = `
-    ${disc.illustration}
-    <p class="doodle-text" style="margin-top:8px;">${disc.name}</p>
-  `;
+  document.getElementById('disc-badge').textContent = disc.name;
+  document.getElementById('disc-badge').classList.add('visible');
+  document.getElementById('btn-generate').disabled = false;
+  document.getElementById('btn-hint').textContent = '← ready to generate!';
+  document.getElementById('disc-illustration').innerHTML = `${disc.illustration}<p class="doodle-text" style="margin-top:8px;">${disc.name}</p>`;
+  // Reset locks when discipline changes
+  if (generated) {
+    Object.keys(locks).forEach(k => locks[k] = false);
+    renderBrief();
+  }
 }
 
-// ─────────────────────────────────────────────
-//  GENERATE BRIEF
-// ─────────────────────────────────────────────
-function generateBrief() {
-  if (!selectedDisc) return;
+function toggleLock(key, btn) {
+  locks[key] = !locks[key];
+  btn.classList.toggle('locked', locks[key]);
+  btn.closest('.card-wrap, .action-wrap').classList.toggle('is-locked', locks[key]);
+  btn.title = locks[key] ? 'Locked — won\'t re-roll' : 'Click to lock this card';
+}
 
+function lockBtn(key, colorClass) {
+  return `<button class="lock-btn ${locks[key] ? 'locked' : ''}" onclick="toggleLock('${key}', this)" title="${locks[key] ? 'Locked' : 'Click to lock this card'}">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <g class="icon-unlocked" style="display:${locks[key] ? 'none' : 'block'}">
+        <rect x="3" y="11" width="18" height="11" rx="2"/>
+        <path d="M7 11V7a5 5 0 0 1 9.9-1"/>
+      </g>
+      <g class="icon-locked" style="display:${locks[key] ? 'block' : 'none'}">
+        <rect x="3" y="11" width="18" height="11" rx="2"/>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+      </g>
+    </svg>
+  </button>`;
+}
+
+function renderBrief() {
   const disc = library[selectedDisc];
-  const genBody = document.getElementById('gen-body');
-  const printHint = document.getElementById('print-hint');
 
-  // Pick cards
-  const what = pick(disc.what);
-  const who  = pick(disc.who);
-  const why  = pick(disc.why);
-  const donts = pickN(disc.donts, 3);
-  const action = pick(disc.actions);
+  // Roll unlocked cards only
+  if (!locks.what)   values.what   = pick(disc.what);
+  if (!locks.who)    values.who    = pick(disc.who);
+  if (!locks.why)    values.why    = pick(disc.why);
+  if (!locks.action) values.action = pick(disc.actions);
 
-  // Build HTML
-  genBody.innerHTML = `
+  // For donts, roll all three if none locked, else selectively re-roll
+  const anyDontLocked = locks.dont0 || locks.dont1 || locks.dont2;
+  if (!anyDontLocked) {
+    const rolled = pickN(disc.donts, 3);
+    values.dont0 = rolled[0]; values.dont1 = rolled[1]; values.dont2 = rolled[2];
+  } else {
+    // Re-roll each unlocked dont, excluding currently locked values
+    const excluded = [
+      locks.dont0 ? values.dont0 : null,
+      locks.dont1 ? values.dont1 : null,
+      locks.dont2 ? values.dont2 : null,
+    ].filter(Boolean);
+    const pool = disc.donts.filter(d => !excluded.includes(d));
+    if (!locks.dont0) values.dont0 = pick(pool);
+    if (!locks.dont1) values.dont1 = pick(pool.filter(d => d !== values.dont0));
+    if (!locks.dont2) values.dont2 = pick(pool.filter(d => d !== values.dont0 && d !== values.dont1));
+  }
+
+  const delay = (key, d) => locks[key] ? '' : `style="animation-delay:${d}s"`;
+
+  document.getElementById('gen-body').innerHTML = `
     <div class="card-group">
       <div class="card-group-label">✦ Mission</div>
-      <div class="brief-card do-card" style="animation-delay:0.05s">
-        <span class="card-prefix">Create</span>${what}
+      <div class="card-wrap ${locks.what ? 'is-locked' : ''}">
+        <div class="brief-card do-card" ${delay('what','0.05')}><span class="card-prefix">Create</span>${values.what}</div>
+        ${lockBtn('what')}
       </div>
-      <div class="brief-card do-card" style="animation-delay:0.15s">
-        <span class="card-prefix">For</span>${who}
+      <div class="card-wrap ${locks.who ? 'is-locked' : ''}">
+        <div class="brief-card do-card" ${delay('who','0.15')}><span class="card-prefix">For</span>${values.who}</div>
+        ${lockBtn('who')}
       </div>
-      <div class="brief-card do-card" style="animation-delay:0.25s">
-        <span class="card-prefix">To</span>${why}
+      <div class="card-wrap ${locks.why ? 'is-locked' : ''}">
+        <div class="brief-card do-card" ${delay('why','0.25')}><span class="card-prefix">To</span>${values.why}</div>
+        ${lockBtn('why')}
       </div>
     </div>
-
     <div class="card-group" style="margin-top:4px;">
       <div class="card-group-label">✗ Limitations</div>
-      <div class="brief-card dont-card" style="animation-delay:0.35s">
-        <span class="card-prefix">Rule 1</span>${donts[0]}
+      <div class="card-wrap ${locks.dont0 ? 'is-locked' : ''}">
+        <div class="brief-card dont-card" ${delay('dont0','0.35')}><span class="card-prefix">Rule 1</span>${values.dont0}</div>
+        ${lockBtn('dont0')}
       </div>
-      <div class="brief-card dont-card" style="animation-delay:0.45s">
-        <span class="card-prefix">Rule 2</span>${donts[1]}
+      <div class="card-wrap ${locks.dont1 ? 'is-locked' : ''}">
+        <div class="brief-card dont-card" ${delay('dont1','0.45')}><span class="card-prefix">Rule 2</span>${values.dont1}</div>
+        ${lockBtn('dont1')}
       </div>
-      <div class="brief-card dont-card" style="animation-delay:0.55s">
-        <span class="card-prefix">Rule 3</span>${donts[2]}
+      <div class="card-wrap ${locks.dont2 ? 'is-locked' : ''}">
+        <div class="brief-card dont-card" ${delay('dont2','0.55')}><span class="card-prefix">Rule 3</span>${values.dont2}</div>
+        ${lockBtn('dont2')}
       </div>
     </div>
-
-    <div class="action-step" style="animation-delay:0.65s">
-      <span class="card-prefix">→ First Action</span>
-      <p>${action}</p>
+    <div class="action-wrap ${locks.action ? 'is-locked' : ''}">
+      <div class="action-step ${locks.action ? 'is-locked' : ''}" ${delay('action','0.65')}><span class="card-prefix">→ First Action</span><p>${values.action}</p></div>
+      ${lockBtn('action')}
     </div>
-  `;
+    <div class="lock-hint visible">hover a card to lock it ↑</div>`;
 
-  // Show print hint
-  printHint.classList.add('visible');
+  document.getElementById('print-hint').classList.add('visible');
+  document.getElementById('btn-generate').textContent = '↻ Re-roll Unlocked';
+  generated = true;
+}
 
-  // Change button text
-  const genBtn = document.getElementById('btn-generate');
-  genBtn.textContent = '↻ Generate Again';
-
-  hasGenerated = true;
+function generateBrief() {
+  if (!selectedDisc) return;
+  if (!generated) {
+    // First generate — reset all locks
+    Object.keys(locks).forEach(k => locks[k] = false);
+  }
+  renderBrief();
 }
 </script>
 </body>
