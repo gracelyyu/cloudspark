@@ -61,74 +61,42 @@
   .gen-top-label { font-family: var(--font-hand); font-size: 16px; color: var(--orange); letter-spacing: 1px; }
   .gen-disc-badge { font-family: var(--font-hand); font-size: 13px; background: var(--orange); color: white; padding: 3px 10px; border-radius: 20px; display: none; }
   .gen-disc-badge.visible { display: block; }
-  .gen-body { padding: 20px 24px; flex: 1; display: flex; flex-direction: column; gap: 16px; overflow-y: auto; }
+  .gen-body { padding: 20px 24px; flex: 1; display: flex; flex-direction: column; gap: 14px; overflow-y: auto; }
   .gen-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 1; gap: 16px; padding: 40px 0; text-align: center; }
   .gen-placeholder .big-spark { font-family: var(--font-display); font-size: 72px; font-style: italic; color: var(--cream); line-height: 1; }
   .gen-placeholder p { font-family: var(--font-hand); font-size: 18px; color: var(--warm-mid); max-width: 220px; line-height: 1.4; }
   .card-group { display: flex; flex-direction: column; gap: 8px; }
   .card-group-label { font-family: var(--font-hand); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--warm-mid); margin-bottom: 4px; }
-
-  /* Card wrapper for lock button */
-  .card-wrap { position: relative; display: flex; align-items: stretch; gap: 0; }
-  .brief-card {
-    border-radius: 10px; padding: 10px 14px; font-size: 14px; line-height: 1.45;
-    animation: cardReveal 0.4s cubic-bezier(.34,1.56,.64,1) both;
-    flex: 1; transition: opacity 0.2s, border-radius 0.2s;
-  }
+  .brief-card { border-radius: 10px; padding: 10px 14px; font-size: 14px; line-height: 1.45; animation: cardReveal 0.4s cubic-bezier(.34,1.56,.64,1) both; }
   .brief-card.do-card { background: var(--green); color: white; border-left: 3px solid rgba(255,255,255,0.4); }
   .brief-card.dont-card { background: #FFF0EC; color: var(--ink); border-left: 3px solid var(--orange); }
   .brief-card .card-prefix { font-family: var(--font-hand); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; opacity: 0.75; display: block; margin-bottom: 3px; }
   .brief-card.do-card .card-prefix { color: rgba(255,255,255,0.8); }
   .brief-card.dont-card .card-prefix { color: var(--orange); }
 
-  /* Lock button */
-  .lock-btn {
-    border: none; background: transparent; cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    width: 36px; min-width: 36px; border-radius: 0 10px 10px 0;
-    opacity: 0; transition: opacity 0.2s, background 0.2s;
-    padding: 0;
-  }
-  .card-wrap:hover .lock-btn { opacity: 1; }
-  .lock-btn.locked { opacity: 1; }
-  .lock-btn svg { width: 16px; height: 16px; }
+  /* Meta row for format / difficulty / time */
+  .meta-row { display: flex; gap: 8px; flex-wrap: wrap; animation: cardReveal 0.4s 0.1s cubic-bezier(.34,1.56,.64,1) both; }
+  .meta-pill { border-radius: 8px; padding: 6px 12px; font-size: 13px; line-height: 1.3; display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 80px; }
+  .meta-pill .card-prefix { font-family: var(--font-hand); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; display: block; margin-bottom: 2px; }
+  .meta-pill.format-pill { background: #EDE8DE; color: var(--ink); }
+  .meta-pill.format-pill .card-prefix { color: var(--warm-mid); }
+  .meta-pill.diff-pill { background: #EDE8DE; color: var(--ink); }
+  .meta-pill.diff-pill .card-prefix { color: var(--warm-mid); }
+  .meta-pill.time-pill { background: #EDE8DE; color: var(--ink); }
+  .meta-pill.time-pill .card-prefix { color: var(--warm-mid); }
 
-  .card-wrap .brief-card { border-radius: 10px 0 0 10px; }
-  .card-wrap .brief-card.do-card + .lock-btn { background: rgba(255,255,255,0.15); }
-  .card-wrap .brief-card.do-card + .lock-btn:hover,
-  .card-wrap .brief-card.do-card + .lock-btn.locked { background: rgba(255,255,255,0.3); }
-  .card-wrap .brief-card.dont-card + .lock-btn { background: #ffe0d6; }
-  .card-wrap .brief-card.dont-card + .lock-btn:hover,
-  .card-wrap .brief-card.dont-card + .lock-btn.locked { background: #ffc9b5; }
-
-  .lock-btn .icon-locked { display: none; }
-  .lock-btn .icon-unlocked { display: block; }
-  .lock-btn.locked .icon-locked { display: block; }
-  .lock-btn.locked .icon-unlocked { display: none; }
-
-  /* Locked card glow */
-  .card-wrap.is-locked .brief-card { box-shadow: 0 0 0 2px var(--yellow); }
-  .card-wrap.is-locked .lock-btn { opacity: 1; }
-
-  /* Locked animation override — no re-reveal */
-  .card-wrap.is-locked .brief-card { animation: none; }
+  /* Expandable brief card */
+  .brief-full-card { background: var(--green); color: white; border-radius: 10px; padding: 10px 14px; font-size: 14px; line-height: 1.55; animation: cardReveal 0.4s 0.05s cubic-bezier(.34,1.56,.64,1) both; }
+  .brief-full-card .card-prefix { font-family: var(--font-hand); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.8); display: block; margin-bottom: 4px; }
+  .brief-preview { display: block; }
+  .brief-expanded { display: none; margin-top: 6px; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 8px; font-size: 13px; color: rgba(255,255,255,0.9); line-height: 1.6; }
+  .brief-toggle { background: none; border: none; cursor: pointer; font-family: var(--font-hand); font-size: 13px; color: rgba(255,255,255,0.7); margin-top: 6px; padding: 0; display: inline-block; text-decoration: underline; }
+  .brief-toggle:hover { color: white; }
 
   @keyframes cardReveal { from { opacity: 0; transform: translateY(12px) rotate(-1deg); } to { opacity: 1; transform: translateY(0) rotate(0deg); } }
-
-  .action-step { background: var(--yellow); border-radius: 10px; padding: 12px 14px; animation: cardReveal 0.4s 0.5s cubic-bezier(.34,1.56,.64,1) both; }
-  .action-step.is-locked { animation: none; box-shadow: 0 0 0 2px var(--orange); }
+  .action-step { background: var(--yellow); border-radius: 10px; padding: 12px 14px; animation: cardReveal 0.4s 0.4s cubic-bezier(.34,1.56,.64,1) both; }
   .action-step .card-prefix { font-family: var(--font-hand); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #6B5000; display: block; margin-bottom: 3px; }
   .action-step p { font-size: 14px; color: var(--ink); line-height: 1.45; }
-  .action-wrap { position: relative; display: flex; align-items: stretch; }
-  .action-wrap .action-step { flex: 1; border-radius: 10px 0 0 10px; }
-  .action-wrap .lock-btn { background: #d4b83a; border-radius: 0 10px 10px 0; }
-  .action-wrap .lock-btn:hover,
-  .action-wrap .lock-btn.locked { background: #b89e28; }
-  .action-wrap:hover .lock-btn { opacity: 1; }
-
-  .lock-hint { font-family: var(--font-hand); font-size: 12px; color: var(--warm-mid); text-align: center; margin-top: 2px; opacity: 0; transition: opacity 0.4s; }
-  .lock-hint.visible { opacity: 1; }
-
   .gen-footer { padding: 16px 24px 24px; }
   .btn-generate { width: 100%; padding: 16px 24px; background: var(--orange); color: white; border: none; border-radius: 12px; font-family: var(--font-hand); font-size: 22px; font-weight: 700; cursor: pointer; transition: transform 0.2s cubic-bezier(.34,1.56,.64,1), box-shadow 0.2s; box-shadow: 4px 4px 0 var(--ink); letter-spacing: 0.5px; }
   .btn-generate:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--ink); }
@@ -147,18 +115,9 @@
   .anim-5 { animation: fadeUp 0.6s 0.5s both; }
   .anim-6 { animation: fadeUp 0.6s 0.6s both; }
   .wiggle { animation: wiggle 3s ease-in-out infinite; }
-  .svg-filters { position: absolute; width: 0; height: 0; }
 </style>
 </head>
 <body>
-<svg class="svg-filters" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <filter id="sketchy" x="-5%" y="-5%" width="110%" height="110%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="5" seed="2" result="noise"/>
-      <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5" xChannelSelector="R" yChannelSelector="G"/>
-    </filter>
-  </defs>
-</svg>
 <div class="container">
   <header class="anim-1">
     <div class="logo-block">
@@ -181,8 +140,8 @@
       <div class="cell-label">// how it works</div>
       <ul class="steps">
         <li class="step"><span class="step-num">1</span><div class="step-text"><strong>Choose your discipline</strong> Select the creative field you're working in today.</div></li>
-        <li class="step"><span class="step-num">2</span><div class="step-text"><strong>Hit Generate</strong> Get 3 mission prompts + 3 limitations. Randomly drawn every time.</div></li>
-        <li class="step"><span class="step-num">3</span><div class="step-text"><strong>Lock what you love</strong> Keep a card and re-roll the rest until the brief is right.</div></li>
+        <li class="step"><span class="step-num">2</span><div class="step-text"><strong>Hit Generate</strong> Get a brief, format, difficulty, time budget + one hard constraint.</div></li>
+        <li class="step"><span class="step-num">3</span><div class="step-text"><strong>Start the project</strong> Your first action step is right there. No excuses.</div></li>
       </ul>
     </div>
     <div class="cell cell-disciplines anim-4">
@@ -202,7 +161,6 @@
           <circle cx="60" cy="60" r="48" stroke="#1C1A16" stroke-width="2.5" stroke-dasharray="6 4"/>
           <path d="M60 20 L64 52 L96 60 L64 68 L60 100 L56 68 L24 60 L56 52 Z" fill="#E8441A" opacity="0.85"/>
           <circle cx="60" cy="60" r="6" fill="#1C1A16"/>
-          <path d="M40 25 C35 20, 28 22, 26 28" stroke="#1C1A16" stroke-width="1.5" stroke-linecap="round"/>
         </svg>
         <p class="doodle-text">waiting for<br>your pick...</p>
       </div>
@@ -228,30 +186,61 @@
   <footer></footer>
 </div>
 <script>
-const LOCK_SVG = `
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-    <class class="icon-unlocked">
-      <rect class="icon-unlocked" x="3" y="11" width="18" height="11" rx="2"/>
-      <path class="icon-unlocked" d="M7 11V7a5 5 0 0 1 9.9-1"/>
-    </class>
-    <g class="icon-locked">
-      <rect x="3" y="11" width="18" height="11" rx="2"/>
-      <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-    </g>
-  </svg>`;
-
-// We'll manage lock state with a simple object
-const locks = { what: false, who: false, why: false, dont0: false, dont1: false, dont2: false, action: false };
-const values = { what: '', who: '', why: '', dont0: '', dont1: '', dont2: '', action: '' };
-
 const library = {
   film: {
     name: "Film & Video",
     illustration: `<svg width="120" height="120" viewBox="0 0 120 120" fill="none"><rect x="15" y="35" width="90" height="55" rx="4" stroke="#1C1A16" stroke-width="2.5" fill="#EDE8DE"/><circle cx="38" cy="62" r="14" stroke="#1C1A16" stroke-width="2" fill="#2B4A8C" opacity="0.7"/><circle cx="38" cy="62" r="5" fill="#1C1A16"/><line x1="80" y1="40" x2="80" y2="85" stroke="#1C1A16" stroke-width="1.5"/><rect x="85" y="45" width="12" height="8" rx="2" fill="#E8441A"/><rect x="85" y="57" width="12" height="8" rx="2" fill="#E8441A"/><rect x="85" y="69" width="12" height="8" rx="2" fill="#E8441A"/><path d="M10 28 L20 35" stroke="#1C1A16" stroke-width="2" stroke-linecap="round"/><path d="M25 25 L28 35" stroke="#1C1A16" stroke-width="2" stroke-linecap="round"/><path d="M40 23 L36 35" stroke="#1C1A16" stroke-width="2" stroke-linecap="round"/></svg>`,
-    what: ["a short film about a daily ritual","a silent documentary","a video portrait of a stranger","a one-location drama","a found-footage experiment","a video essay without a narrator","a time-lapse narrative","a film that begins at the end","a two-character piece with no dialogue","a day-in-the-life film from an unusual POV","a film made entirely in one take","a visual response to a piece of music","a film about something that takes exactly 60 seconds to happen","a documentary about a single object","a film told entirely in reflections","a portrait of a place in the hour before it changes forever","a film about the space between two people","a visual diary of one week shot only between 6am and 7am","a film about waiting — real, unscripted waiting","a narrative told entirely through hands","a film where the camera never moves","a portrait of a skill nobody under 40 still has","a film in which the subject never appears on screen","a short about the last time something happened","a film about a journey where the destination is never shown"],
-    who: ["for someone who has never left their town","for a person experiencing something for the first time","for an audience of exactly one","for people who are afraid of the dark","for children who ask too many questions","for night shift workers","for people going through a transition","for an audience that doesn't speak your language","for someone who stopped making things and doesn't know why","for a person who thinks cinema is not for them","for an elderly relative who has never been filmed","for someone who just moved to a new city","for people who find silence unbearable","for someone watching on a phone with the sound off","for a person who has lost their sense of direction"],
-    why: ["to make the invisible visible","to provoke discomfort in a safe way","to document what is about to disappear","to make the ordinary feel extraordinary","to start a conversation that words can't","to change how someone sees a familiar place","to capture a feeling that has no name","to force the viewer to slow down","to make a person feel seen without showing their face","to turn a private experience into a shared one","to find beauty in something everyone overlooks","to make someone reconsider a decision they've already made","to leave the viewer with more questions than they arrived with","to honour something before it disappears"],
-    donts: ["Don't use a tripod — ever.","Don't show a single human face.","Don't use any music.","Don't include any dialogue.","Don't shoot in colour.","Don't use any cuts — one continuous shot only.","Don't use any artificial lighting.","Don't show the main subject until the final third.","Don't shoot anything wider than a close-up.","Don't use any footage shot after sunrise or before sunset.","Don't include anything man-made.","Don't shoot in a location you've been to before.","Don't use any camera movement — lock off only.","Don't show the sky.","Don't include any text on screen.","Don't use a lens wider than 50mm.","Don't shoot indoors.","Don't show anyone who knows they're being filmed.","Don't use real-time speed — slow or fast only.","Don't show the beginning or end of any action.","Don't use sound recorded on the day.","Don't show anything in focus — soft focus throughout.","Don't include a single straight line in any frame."],
+    prompts: [
+      { title:"The Loudest Quiet", format:"Experimental / Abstract", difficulty:"Beginner", time:"45–90 mins", brief:"Find a space you consider \"quiet.\" Make a 60–90 second film that proves it isn't. Your only subject is the sounds hiding inside the silence — air conditioning hum, distant traffic, your own breathing. Let the camera follow the sound, not the other way around.", constraint:"Don't use any sound recorded after the shoot. Everything in the final cut must have been captured live in that location, including any music-like elements." },
+      { title:"One Sentence, One Shot", format:"Short Narrative / Fiction", difficulty:"Beginner", time:"30–60 mins", brief:"Choose any single sentence from a novel, a text message, or something overheard today. Make a film that is exactly one unbroken shot, no longer than 90 seconds, that gives that sentence its full emotional weight — without ever showing or speaking the sentence itself.", constraint:"Don't cut. The film is one take, start to finish. No editing beyond a clean in and out point." },
+      { title:"The Tuesday Commercial", format:"Commercial / Branded Content", difficulty:"Beginner", time:"1–2 hours", brief:"Pick the most mundane object within arm's reach right now — a stapler, a mug, a charger cable. Make a 30-second commercial for it as if it were a luxury product launching at a premium price point. Write one line of copy. Shoot it. Cut it.", constraint:"Do use exactly three lighting setups — no more, no fewer — across the entire spot." },
+      { title:"Someone Else's Morning", format:"Documentary / Observational", difficulty:"Beginner", time:"Half a day", brief:"Ask someone you know — not a close friend, ideally — if you can film their morning routine without directing them. Follow them from waking up to leaving the house. Deliver a 2–3 minute observational cut. You may not ask them to repeat anything.", constraint:"Don't speak on camera or in voiceover. Your presence should be felt only through what you choose to frame." },
+      { title:"The Cut That Lies", format:"Experimental / Abstract", difficulty:"Intermediate", time:"2–3 hours", brief:"Take at least 10 minutes of footage you've already shot — from anything, any project, any time — and re-edit it to tell a completely different story than it was originally intended for. The new story must have a clear beginning, middle, and end. Maximum runtime: 2 minutes.", constraint:"Do add exactly one sound effect that was never part of the original recording. It must be the most important sound in the film." },
+      { title:"Vertical Portrait", format:"Social / Vertical Video", difficulty:"Beginner", time:"45–90 mins", brief:"Make a 60-second vertical portrait of a person. Not an interview. Not a talking-head. A portrait — the way a painter would approach one. Find a location, a light, a stillness. Let them exist. Deliver it as a single vertical piece designed for full-screen mobile viewing.", constraint:"Don't let your subject speak. No dialogue, no lip-sync, no text-on-screen quoting them." },
+      { title:"The Invisible Edit", format:"Short Narrative / Fiction", difficulty:"Intermediate", time:"Half a day", brief:"Shoot a 2–3 minute scene involving two people and an object that changes hands. Edit it so that the cuts are completely invisible — the goal is seamless continuity that the viewer never notices. The scene can be about anything, but the object must feel significant.", constraint:"Do shoot every cut from a different distance — no two consecutive shots can be the same focal length." },
+      { title:"No Music Allowed", format:"Commercial / Branded Content", difficulty:"Intermediate", time:"2–3 hours", brief:"Make a 45-second brand spot for a fictional lifestyle product of your invention. It must feel expensive and desirable. Your sound design must carry the emotional register that music would normally do — through texture, rhythm, atmosphere, and sync.", constraint:"Don't use any music, licensed or original. Not even an instrument playing in the background of a shot." },
+      { title:"The Wrong Genre", format:"Short Narrative / Fiction", difficulty:"Intermediate", time:"Half a day", brief:"Take a completely mundane domestic scenario — making dinner, doing laundry, checking the post — and film it in the visual language of a genre it has no right to be in. Horror. Noir. Sci-fi. The scenario doesn't change. Only the how does.", constraint:"Do use practical lights only — no artificial lighting rigs. Every light source must be visible or implied within the frame." },
+      { title:"10 Frames, 1 Story", format:"Experimental / Abstract", difficulty:"Beginner", time:"1–2 hours", brief:"Make a film that is exactly 10 shots long — no more, no fewer. Each shot can be any duration. The film must tell a complete story with a protagonist, a problem, and a resolution. No dialogue permitted.", constraint:"Don't move the camera. Every shot is locked off. No handheld, no pan, no tilt, no zoom." },
+      { title:"The B-Roll That Bleeds", format:"Documentary / Observational", difficulty:"Intermediate", time:"2–3 hours", brief:"Make a 90-second film using only b-roll — no interviews, no narration, no presenter. The subject is an invisible emotional state: grief, anticipation, relief, shame. Don't name it. Don't explain it. Make the viewer feel it through image and sound alone.", constraint:"Do begin and end on the exact same image, shot at different times of day or in different conditions." },
+      { title:"Sync or Swim", format:"Music Video / Editorial", difficulty:"Beginner", time:"2–4 hours", brief:"Choose any piece of music under 3 minutes — anything you love right now. Shoot footage after you've chosen the track, not before. Let the music tell you what to look for. Edit to picture. Deliver a complete music video.", constraint:"Don't use any shot longer than 4 seconds. Every cut lands within that window." },
+      { title:"The Actor Has No Lines", format:"Short Narrative / Fiction", difficulty:"Intermediate", time:"Half a day", brief:"Direct a non-actor in a 2-minute scene in which they play a version of themselves receiving news — good or bad, your choice, but commit to one. Brief them only in terms of where they are and what they were just doing. Do not tell them what to feel or how to react.", constraint:"Do shoot the entire scene in a single location without repositioning the camera more than once." },
+      { title:"The Slow Sell", format:"Commercial / Branded Content", difficulty:"Intermediate", time:"2–3 hours", brief:"Make a 60-second commercial with no cuts faster than 3 seconds. The product is real (pick anything you own). The tone is contemplative — the opposite of high-energy ad grammar. Think fragrance commercial meets art film. Make the product feel necessary without ever stating what it does.", constraint:"Don't show the product until the final 10 seconds of the film." },
+      { title:"Ground Level", format:"Documentary / Observational", difficulty:"Beginner", time:"1–2 hours", brief:"Spend one hour in a public space — a market, a park, a transit hub — and shoot exclusively at ground level. Feet, wheels, shadows, puddles, dropped things. Edit it into a 60–90 second portrait of that space. No people's faces may appear.", constraint:"Do include at least one shot where the camera is touching the ground." },
+      { title:"The Scene Behind the Scene", format:"Experimental / Abstract", difficulty:"Advanced", time:"Half a day", brief:"Film someone in the middle of a task — cooking, repairing something, writing. Film them for at least 20 minutes, uninterrupted. Then edit 2 minutes that says something about them that they didn't know they were revealing. No interviews. No narration.", constraint:"Don't use the first or last 5 minutes of your footage." },
+      { title:"Three Locations, One Feeling", format:"Music Video / Editorial", difficulty:"Intermediate", time:"Half a day", brief:"Choose an emotion. Shoot in exactly three distinct locations that feel like that emotion without literally depicting it — no crying for sadness, no laughing for joy. Edit the footage into a 60–90 second piece set to a track of your choice.", constraint:"Do use the same camera move in each location — repeat it exactly, like a visual refrain." },
+      { title:"Two-Stop Lighting", format:"Short Narrative / Fiction", difficulty:"Intermediate", time:"2–3 hours", brief:"Write a 1-page scene between two characters in conflict. Shoot it. But your lighting must do dramatic work that the dialogue is not doing — the audience should be able to feel the power dynamic between the characters by lighting alone, even with the sound off.", constraint:"Don't adjust the lighting between shots. Set it once for the scene. Every angle must work within that single setup." },
+      { title:"The Sound You Can't See", format:"Experimental / Abstract", difficulty:"Advanced", time:"2–3 hours", brief:"Record 5 minutes of audio in an interesting location with your eyes closed. Do not look at what you're pointing the microphone at. Then — and only then — go and film the source of the most interesting sound you recorded. Edit a 60-second film in which the audio leads and the image follows.", constraint:"Do keep the audio recording unedited — the sound plays as one continuous take underneath whatever images you cut." },
+      { title:"For One Viewer", format:"Social / Vertical Video", difficulty:"Beginner", time:"45–90 mins", brief:"Make a 60-second vertical video addressed directly to one specific person — someone real, someone you know. Don't name them. Don't explain who they are. The video should feel intensely personal to that one viewer and yet legible to anyone. You may appear in it or not.", constraint:"Don't use text on screen — no captions, no supers, no lower thirds." },
+      { title:"The Establishing Shot That Never Comes", format:"Short Narrative / Fiction", difficulty:"Intermediate", time:"Half a day", brief:"Write and shoot a 2-minute scene in a location the viewer never fully sees. Establish mood, geography, and stakes through details, fragments, and implication — but never show the whole space. The viewer must feel they understand where they are without being shown.", constraint:"Don't use any shot wider than a 50mm equivalent focal length." },
+      { title:"Before the Moment", format:"Documentary / Observational", difficulty:"Advanced", time:"Half a day to 1 full day", brief:"Arrange to film someone immediately before something significant happens in their day — a job interview, a performance, a difficult conversation, a medical appointment. Film them in the 20 minutes prior. Do not film the event itself. Cut a 90-second piece entirely from the pre-event footage.", constraint:"Do include at least one unbroken shot of 60 seconds or longer." },
+      { title:"Cut to the Bone", format:"Short Narrative / Fiction", difficulty:"Beginner", time:"1–2 hours", brief:"Take any short film you've made before — a student project, a personal piece, anything. Re-edit it to exactly half its runtime. Don't shoot anything new. Every scene must survive in some form.", constraint:"Don't remove any shot entirely — every original shot must appear at least once in the new cut, even briefly." },
+      { title:"The Texture of a Place", format:"Experimental / Abstract", difficulty:"Beginner", time:"1–2 hours", brief:"Go somewhere you've never been — or somewhere deeply familiar seen at an unfamiliar time. Make a 90-second film in which the place itself is the subject, not what happens there. No people. No narrative. Just the material and atmospheric qualities of the space.", constraint:"Do change your shooting height at least four times — the camera must experience the space from multiple physical levels." },
+      { title:"The Product Doesn't Exist Yet", format:"Commercial / Branded Content", difficulty:"Advanced", time:"Half a day", brief:"Invent a product that doesn't exist — something genuinely new, not a renamed real thing. Write a 30-second commercial for it. The viewer must understand what the product does without any on-screen explanation, text, or voiceover. Shoot it. Cut it. Make it convincing.", constraint:"Don't show the product being used correctly — only show the before and after states." },
+      { title:"The Wrong Music", format:"Music Video / Editorial", difficulty:"Intermediate", time:"2–3 hours", brief:"Take footage you've already shot — any footage, from anything. Choose a track that feels completely wrong for it. Edit the footage to the music anyway, and commit fully. Deliver a 60–90 second piece that somehow makes the wrongness feel intentional and right.", constraint:"Do sync at least three specific cuts to precise beats or musical events in the track." },
+      { title:"Perform the Mundane", format:"Social / Vertical Video", difficulty:"Intermediate", time:"1–2 hours", brief:"Direct yourself or someone else in a 45–60 second vertical video performing a completely mundane physical task — washing up, tying shoes, making tea — but with the heightened physical precision and intention of a dancer or martial artist. The task should remain recognisably the task.", constraint:"Don't use any music. The sound of the action itself must carry the rhythm." },
+      { title:"The Interview That Isn't", format:"Documentary / Observational", difficulty:"Advanced", time:"Half a day", brief:"Conduct a 20-minute interview with someone about something they care deeply about. Then edit a 2-minute film in which you use none of the answers — only the moments between questions. The pauses, the breath, the looking-away, the fidgeting.", constraint:"Do use the audio from every question you asked — your voice (or your text on screen) can appear, but only as the questioner, never as narrator." },
+      { title:"Daylight to Dark", format:"Experimental / Abstract", difficulty:"Intermediate", time:"1 full day", brief:"Choose a single location. Shoot the same framed composition — identically locked off — six times across one full day: pre-dawn, dawn, mid-morning, midday, golden hour, dusk. Edit the six shots into a sequence of any order that feels non-chronological. Add one layer of sound design.", constraint:"Don't use the shots in the order they were taken." },
+      { title:"The Film You're Afraid to Make", format:"Any", difficulty:"Advanced", time:"Flexible — up to 1 full day", brief:"Make the short film you've been putting off. Not a vague idea — the specific one. The one with the excuse attached to it. Write the excuse down first. Then make the film anyway, in whatever form is achievable today with what you have.", constraint:"Don't make it longer than 3 minutes." },
+      { title:"The Negative Space Album", format:"Experimental / Abstract", difficulty:"Beginner", time:"2–3 hours", brief:"Shoot a short subject — a person, a place, an object — in both moving image and stills on the same day, in the same session. Edit a 90-second film that intercuts the still photographs with the video footage. The stills are not title cards or inserts — they are shots. They must carry the same weight as the moving image.", constraint:"Don't hold any still image for longer than 2 seconds." },
+      { title:"Annotated Reality", format:"Documentary / Observational", difficulty:"Intermediate", time:"2–4 hours", brief:"Film 5–10 minutes of a real place or event — a street, a shop, a gathering. In the edit, add text directly onto the footage: not subtitles, not lower thirds, but annotations — observations, questions, contradictions, corrections. The text argues with, extends, or undermines what the image shows. Deliver a 90-second piece.", constraint:"Do write every text element in the second person — address the viewer directly, using \"you.\"" },
+      { title:"The Living Photograph", format:"Experimental / Abstract", difficulty:"Intermediate", time:"2–3 hours", brief:"Find a photograph — printed, framed, or on a screen — that means something to you or to someone else. Recreate it in motion: same composition, same light direction, same subject matter if possible, but alive. Shoot the reconstruction and the original photograph. Edit them together in a 60-second piece that moves between the still and the moving.", constraint:"Don't make the recreation identical. One deliberate, meaningful element must differ." },
+      { title:"Draw What You Shot", format:"Music Video / Editorial", difficulty:"Intermediate", time:"Half a day", brief:"Shoot 3–5 minutes of footage on any subject. Watch it back. Then — before you edit — draw or sketch at least 6 frames from the footage by hand: key moments, compositions that struck you, or images you wish you'd captured differently. Use those drawings as edit decision guides. Deliver a 60–90 second film where the drawings appear as transitions or inserts at least twice.", constraint:"Don't use any transition other than a hard cut or a drawing." },
+      { title:"The Recorded Letter", format:"Documentary / Observational", difficulty:"Beginner", time:"2–3 hours", brief:"Record a voice memo — 2–3 minutes — of yourself or someone else speaking about a specific memory of a place. Don't plan it; record it in one take, conversationally. Then go and film that place (or the closest available equivalent). Edit a film in which the audio recording plays over footage of the location. The voice and the image must coexist without illustrating each other literally.", constraint:"Don't cut the audio. It plays from start to finish, unedited. Only the image is edited." },
+      { title:"Found World", format:"Experimental / Abstract", difficulty:"Intermediate", time:"2–4 hours", brief:"Find at least 3 minutes of freely available archival or found footage online (public domain, Creative Commons, or your own old footage you've forgotten about). Shoot at least 2 minutes of new footage today. Edit them together into a 90-second film in which the old and new are in genuine dialogue — not illustrated, not contrasted for contrast's sake, but thinking together.", constraint:"Do grade your new footage to match the found material — not the other way around." },
+      { title:"The Illustrated Voice", format:"Social / Vertical Video", difficulty:"Intermediate", time:"2–3 hours", brief:"Record someone speaking about something they care about — 60–90 seconds, one take, vertical frame. Over the top of the footage, add hand-drawn or digitally-drawn annotations, diagrams, or illustrations that respond to what they're saying in real time across the edit. The drawings must add a layer of meaning the words alone don't carry.", constraint:"Don't let any drawing appear on screen for more than 4 seconds." },
+      { title:"Archival Self", format:"Documentary / Observational", difficulty:"Advanced", time:"Half a day", brief:"Find at least 5 minutes of archival footage of yourself — home videos, old clips, anything — or, if none exists, archival footage of someone from your family. Shoot new footage of yourself or that same person today, in the same locations or equivalent ones if possible. Edit a 2-minute film that is a conversation between past and present — without using narration to explain the connection.", constraint:"Don't use any music. The emotional work must be done by image, archive, and ambient sound alone." },
+      { title:"The Podcast That Became a Film", format:"Experimental / Abstract", difficulty:"Beginner", time:"2–3 hours", brief:"Find a podcast episode or radio programme segment — any topic, any length — that you find genuinely interesting. Extract a 60–90 second clip of audio from it (ensure it's for personal, non-commercial use). Now make a film for it. The audio is locked; the image is your response to it. Do not illustrate the content literally.", constraint:"Do shoot all footage in a single unbroken location without moving from your spot." },
+      { title:"I Am the Camera", format:"Short Narrative / Fiction", difficulty:"Beginner", time:"1–2 hours", brief:"Make a 90-second first-person film in which the camera is entirely the protagonist's eye. No cutaways to the protagonist's face. No third-person shots. The viewer only ever sees what the character sees. The character must encounter one other person and one object of significance within the film.", constraint:"Don't stabilise the footage. Let the camera move as a body moves — with breath, weight, and hesitation." },
+      { title:"The Chair's Eye View", format:"Experimental / Abstract", difficulty:"Beginner", time:"1–2 hours", brief:"Choose a stationary object in a room where people spend time — a chair, a table, a doorframe. Mount your camera at the object's eye level and position, and shoot everything that happens from that fixed point for at least 30 minutes. Edit it into a 90-second film from the object's perspective. The object is the protagonist.", constraint:"Don't move the camera at all. Not once. The world must come to it." },
+      { title:"Watched", format:"Documentary / Observational", difficulty:"Intermediate", time:"2–3 hours", brief:"Make a 90-second observational film using a surveillance aesthetic — fixed wide angles, high or corner-mounted perspectives, long takes, minimal intervention. Your subject is people in a public or semi-public space behaving as if unobserved. You are not hidden, but your camera should feel like infrastructure rather than filmmaking equipment. All subjects must be in public spaces where filming is permitted.", constraint:"Do shoot every shot from above eye level. The camera must always look down on the scene." },
+      { title:"The Dog's Afternoon", format:"Experimental / Abstract", difficulty:"Beginner", time:"1–2 hours", brief:"Choose a non-human subject — an animal, a plant, a piece of machinery, weather — and make a 60–90 second film from its subjective point of view. You are imagining perception, not documenting behaviour. What does this entity notice? At what speed? With what priorities? Sound design is as important as image.", constraint:"Don't use any camera height above 60cm from the ground." },
+      { title:"You Are Here", format:"Social / Vertical Video", difficulty:"Intermediate", time:"1–2 hours", brief:"Make a 60-second vertical film addressed entirely to the person watching it. The camera is their mirror — it shows them what they look like in this moment, or what you imagine they look like. Speak to them directly, film them directly (or through a proxy — another person standing in), and make it feel like the film knows who is watching.", constraint:"Don't break the fourth wall more than once. Choose the single moment of direct address carefully — everything else holds the frame." },
+      { title:"Every Stranger Is the Hero", format:"Documentary / Observational", difficulty:"Intermediate", time:"2–3 hours", brief:"Spend one hour in a busy public space with your camera held at your own eye level, shooting what you actually look at as you walk, wait, and observe. Do not direct your gaze for the camera — shoot what genuinely catches your attention. Edit 90 seconds from the best of what you captured. Every person who appears is the protagonist of their own film; your edit should honour that.", constraint:"Don't include any shot where you were the centre of attention — if someone notices the camera and reacts to it, that shot cannot be used." },
+      { title:"The Room Remembers", format:"Experimental / Abstract", difficulty:"Intermediate", time:"2–4 hours", brief:"Set up a camera in a room of your home — locked off, wide, as if it were a security camera — and leave it running for at least 2 hours while you go about your day as normally as possible. Do not perform for it. Review the footage and edit a 90-second film that feels like the room is narrating its own life.", constraint:"Do use only the audio from the recording — no added sound, no music. The room's ambient sound is the soundtrack." },
+      { title:"The Mirror Brief", format:"Commercial / Branded Content", difficulty:"Advanced", time:"Half a day", brief:"Make a 30-second commercial in which the product is the viewer themselves — their attention, their time, their gaze. The camera looks at them the entire time. You are selling them back to themselves. Write copy that works in second person. Light it as if the viewer is the most important thing in the room, because they are.", constraint:"Don't use a human performer. The camera — and the viewer it implies — is the only presence." },
+      { title:"Infrastructure", format:"Documentary / Observational", difficulty:"Advanced", time:"Half a day", brief:"Choose a piece of urban or industrial infrastructure — a junction, a ventilation shaft, a loading bay, a pedestrian crossing, a car park stairwell. Mount your camera as if it belongs there — as if it has always been there — and shoot a minimum of 30 minutes. Edit a 2-minute film that presents the infrastructure as the protagonist and human beings as incidental to its existence.", constraint:"Do include at least one shot of exactly 5 minutes, uncut, in your final edit." },
+      { title:"The Golden Hour Diary", format:"Documentary / Observational", difficulty:"Intermediate", time:"7 days (one hour per day, 6–7am)", brief:"For seven consecutive days, shoot only between 6am and 7am. No exceptions. What you shoot is entirely up to you — yourself, your home, your street, a regular journey, a person, a ritual. At the end of the week, edit everything into a single 2–3 minute visual diary. The film must feel like one coherent piece, not seven separate days stitched together.", constraint:"Don't shoot on any day you don't feel like it. Show up anyway." }
+    ],
     actions: ["Set a timer for 20 minutes and write down every visual that comes to mind. Pick the strangest one.","Walk outside right now and film the first moving thing you see. Watch it back. That's your opening shot.","Draw a rough storyboard of just 5 frames. Start with the last frame first.","Find a location within walking distance. Go there. Stand in it for 5 minutes before you film anything.","Identify the single emotion you want the viewer to feel in the last 10 seconds. Work backwards from there.","List three things you've never filmed before. Pick one. That's your subject.","Write a one-sentence treatment — subject, action, feeling. Pin it somewhere you can see it while you shoot.","Find a piece of music that captures the mood you want. Play it on a loop while you plan. Don't use it in the film.","Name the one rule from your Don't list that frightens you most. Start there.","Describe your film in exactly six words. Those six words are your brief.","Go to where you plan to shoot. Film one test minute right now — no plan, no pressure. Watch it back and find the one frame that surprises you.","Write down the last image you remember from a dream. Build your opening shot around it.","Find a stranger doing something ordinary. Watch them for two minutes without filming. Then set up your shot.","Decide on your final image before anything else. Work backwards from it as if it's already perfect.","Pick the most inconvenient location in your brief — the one that requires the most effort to reach. That's where you start."]
   },
   motion: {
@@ -293,7 +282,6 @@ const library = {
 };
 
 let selectedDisc = null;
-let generated = false;
 
 function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 function pickN(arr, n) { return [...arr].sort(() => Math.random() - 0.5).slice(0, n); }
@@ -308,113 +296,66 @@ function selectDisc(btn) {
   document.getElementById('btn-generate').disabled = false;
   document.getElementById('btn-hint').textContent = '← ready to generate!';
   document.getElementById('disc-illustration').innerHTML = `${disc.illustration}<p class="doodle-text" style="margin-top:8px;">${disc.name}</p>`;
-  // Reset locks when discipline changes
-  if (generated) {
-    Object.keys(locks).forEach(k => locks[k] = false);
-    renderBrief();
-  }
 }
 
-function toggleLock(key, btn) {
-  locks[key] = !locks[key];
-  btn.classList.toggle('locked', locks[key]);
-  btn.closest('.card-wrap, .action-wrap').classList.toggle('is-locked', locks[key]);
-  btn.title = locks[key] ? 'Locked — won\'t re-roll' : 'Click to lock this card';
-}
-
-function lockBtn(key, colorClass) {
-  return `<button class="lock-btn ${locks[key] ? 'locked' : ''}" onclick="toggleLock('${key}', this)" title="${locks[key] ? 'Locked' : 'Click to lock this card'}">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-      <g class="icon-unlocked" style="display:${locks[key] ? 'none' : 'block'}">
-        <rect x="3" y="11" width="18" height="11" rx="2"/>
-        <path d="M7 11V7a5 5 0 0 1 9.9-1"/>
-      </g>
-      <g class="icon-locked" style="display:${locks[key] ? 'block' : 'none'}">
-        <rect x="3" y="11" width="18" height="11" rx="2"/>
-        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-      </g>
-    </svg>
-  </button>`;
-}
-
-function renderBrief() {
-  const disc = library[selectedDisc];
-
-  // Roll unlocked cards only
-  if (!locks.what)   values.what   = pick(disc.what);
-  if (!locks.who)    values.who    = pick(disc.who);
-  if (!locks.why)    values.why    = pick(disc.why);
-  if (!locks.action) values.action = pick(disc.actions);
-
-  // For donts, roll all three if none locked, else selectively re-roll
-  const anyDontLocked = locks.dont0 || locks.dont1 || locks.dont2;
-  if (!anyDontLocked) {
-    const rolled = pickN(disc.donts, 3);
-    values.dont0 = rolled[0]; values.dont1 = rolled[1]; values.dont2 = rolled[2];
-  } else {
-    // Re-roll each unlocked dont, excluding currently locked values
-    const excluded = [
-      locks.dont0 ? values.dont0 : null,
-      locks.dont1 ? values.dont1 : null,
-      locks.dont2 ? values.dont2 : null,
-    ].filter(Boolean);
-    const pool = disc.donts.filter(d => !excluded.includes(d));
-    if (!locks.dont0) values.dont0 = pick(pool);
-    if (!locks.dont1) values.dont1 = pick(pool.filter(d => d !== values.dont0));
-    if (!locks.dont2) values.dont2 = pick(pool.filter(d => d !== values.dont0 && d !== values.dont1));
-  }
-
-  const delay = (key, d) => locks[key] ? '' : `style="animation-delay:${d}s"`;
-
-  document.getElementById('gen-body').innerHTML = `
-    <div class="card-group">
-      <div class="card-group-label">✦ Mission</div>
-      <div class="card-wrap ${locks.what ? 'is-locked' : ''}">
-        <div class="brief-card do-card" ${delay('what','0.05')}><span class="card-prefix">Create</span>${values.what}</div>
-        ${lockBtn('what')}
-      </div>
-      <div class="card-wrap ${locks.who ? 'is-locked' : ''}">
-        <div class="brief-card do-card" ${delay('who','0.15')}><span class="card-prefix">For</span>${values.who}</div>
-        ${lockBtn('who')}
-      </div>
-      <div class="card-wrap ${locks.why ? 'is-locked' : ''}">
-        <div class="brief-card do-card" ${delay('why','0.25')}><span class="card-prefix">To</span>${values.why}</div>
-        ${lockBtn('why')}
-      </div>
-    </div>
-    <div class="card-group" style="margin-top:4px;">
-      <div class="card-group-label">✗ Limitations</div>
-      <div class="card-wrap ${locks.dont0 ? 'is-locked' : ''}">
-        <div class="brief-card dont-card" ${delay('dont0','0.35')}><span class="card-prefix">Rule 1</span>${values.dont0}</div>
-        ${lockBtn('dont0')}
-      </div>
-      <div class="card-wrap ${locks.dont1 ? 'is-locked' : ''}">
-        <div class="brief-card dont-card" ${delay('dont1','0.45')}><span class="card-prefix">Rule 2</span>${values.dont1}</div>
-        ${lockBtn('dont1')}
-      </div>
-      <div class="card-wrap ${locks.dont2 ? 'is-locked' : ''}">
-        <div class="brief-card dont-card" ${delay('dont2','0.55')}><span class="card-prefix">Rule 3</span>${values.dont2}</div>
-        ${lockBtn('dont2')}
-      </div>
-    </div>
-    <div class="action-wrap ${locks.action ? 'is-locked' : ''}">
-      <div class="action-step ${locks.action ? 'is-locked' : ''}" ${delay('action','0.65')}><span class="card-prefix">→ First Action</span><p>${values.action}</p></div>
-      ${lockBtn('action')}
-    </div>
-    <div class="lock-hint visible">hover a card to lock it ↑</div>`;
-
-  document.getElementById('print-hint').classList.add('visible');
-  document.getElementById('btn-generate').textContent = '↻ Re-roll Unlocked';
-  generated = true;
+function toggleBrief(btn) {
+  const card = btn.closest('.brief-full-card');
+  const expanded = card.querySelector('.brief-expanded');
+  const isOpen = expanded.style.display === 'block';
+  expanded.style.display = isOpen ? 'none' : 'block';
+  btn.textContent = isOpen ? 'Read more ↓' : 'Read less ↑';
 }
 
 function generateBrief() {
   if (!selectedDisc) return;
-  if (!generated) {
-    // First generate — reset all locks
-    Object.keys(locks).forEach(k => locks[k] = false);
+  const disc = library[selectedDisc];
+  const action = pick(disc.actions);
+
+  if (selectedDisc === 'film') {
+    const prompt = pick(disc.prompts);
+    const firstSentence = prompt.brief.split(/(?<=[.!?])\s/)[0];
+    const rest = prompt.brief.slice(firstSentence.length).trim();
+
+    document.getElementById('gen-body').innerHTML = `
+      <div class="card-group">
+        <div class="card-group-label">✦ The Brief</div>
+        <div class="brief-full-card">
+          <span class="card-prefix">${prompt.title}</span>
+          <span class="brief-preview">${firstSentence}</span>
+          ${rest ? `<div class="brief-expanded">${rest}</div><button class="brief-toggle" onclick="toggleBrief(this)">Read more ↓</button>` : ''}
+        </div>
+        <div class="meta-row">
+          <div class="meta-pill format-pill"><span class="card-prefix">Format</span>${prompt.format}</div>
+          <div class="meta-pill diff-pill"><span class="card-prefix">Difficulty</span>${prompt.difficulty}</div>
+          <div class="meta-pill time-pill"><span class="card-prefix">Time Budget</span>${prompt.time}</div>
+        </div>
+      </div>
+      <div class="card-group" style="margin-top:4px;">
+        <div class="card-group-label">✗ The Constraint</div>
+        <div class="brief-card dont-card" style="animation-delay:0.3s"><span class="card-prefix">Rule</span>${prompt.constraint}</div>
+      </div>
+      <div class="action-step"><span class="card-prefix">→ First Action</span><p>${action}</p></div>`;
+  } else {
+    const what = pick(disc.what), who = pick(disc.who), why = pick(disc.why);
+    const donts = pickN(disc.donts, 3);
+    document.getElementById('gen-body').innerHTML = `
+      <div class="card-group">
+        <div class="card-group-label">✦ Mission</div>
+        <div class="brief-card do-card" style="animation-delay:0.05s"><span class="card-prefix">Create</span>${what}</div>
+        <div class="brief-card do-card" style="animation-delay:0.15s"><span class="card-prefix">For</span>${who}</div>
+        <div class="brief-card do-card" style="animation-delay:0.25s"><span class="card-prefix">To</span>${why}</div>
+      </div>
+      <div class="card-group" style="margin-top:4px;">
+        <div class="card-group-label">✗ Limitations</div>
+        <div class="brief-card dont-card" style="animation-delay:0.35s"><span class="card-prefix">Rule 1</span>${donts[0]}</div>
+        <div class="brief-card dont-card" style="animation-delay:0.45s"><span class="card-prefix">Rule 2</span>${donts[1]}</div>
+        <div class="brief-card dont-card" style="animation-delay:0.55s"><span class="card-prefix">Rule 3</span>${donts[2]}</div>
+      </div>
+      <div class="action-step" style="animation-delay:0.65s"><span class="card-prefix">→ First Action</span><p>${action}</p></div>`;
   }
-  renderBrief();
+
+  document.getElementById('print-hint').classList.add('visible');
+  document.getElementById('btn-generate').textContent = '↻ Generate Again';
 }
 </script>
 </body>
